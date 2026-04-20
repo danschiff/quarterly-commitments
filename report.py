@@ -1,0 +1,276 @@
+"""Terminal report renderer for the weekly commitment tracker."""
+
+from datetime import date
+from pathlib import Path
+
+from slack_client import draft_message
+
+BAR_WIDTH = 20
+SEPARATOR = "=" * 70
+SUBSEP    = "-" * 70
+
+
+def _progress_bar(pct, width=BAR_WIDTH):
+    filled = round(pct * width)
+    return "[" + "\u2588" * filled + "\u2591" * (width - filled) + "]"
+
+
+def _group_by_initiative(epics):
+    """Return epics grouped by initiative, preserving encounter order.
+
+    Returns a list of (initiative_key, initiative_summary, [epics]) tuples.
+    Epics with no parent initiative are grouped last under (None, None, ...).
+    """
+    order = []        # preserves first-seen order of initiative keys
+    groups = {}       # initiative_key -> {"summary": str, "epics": list}
+
+    for epic in epics:
+        ikey = epic.get("initiative_key")
+        if ikey not in groups:
+            order.append(ikey)
+            groups[ikey] = {
+                "summary": epic.get("initiative_summary"),
+                "epics": [],
+            }
+        groups[ikey]["epics"].append(epic)
+
+    # Sort: named initiatives first (alphabetically by key), None last
+    named = sorted(
+        (k for k in order if k is not None),
+        key=lambda k: k or ""
+    )
+    order_sorted = named + ([None] if None in groups else [])
+
+    return [
+        (k, groups[k]["summary"], groups[k]["epics"])
+        for k in order_sorted
+    ]
+
+
+def print_report(team_summaries, quarter_pct, config):
+    """Print the full weekly commitment report to stdout.
+
+    Args:
+        team_summaries: list of team dicts produced by main.build_team_summaries()
+            Each dict has:
+                name          str
+                em_slack_id   str
+                sem_slack_id  str
+                epics         list of epic dicts, each with:
+                                  key, summary, progress (from progress.epic_progress),
+                                  slipping (bool)
+                any_slipping  bool
+        quarter_pct:    float — fraction of the quarter elapsed
+        config:         parsed config dict (used for quarter label)
+    """
+    today        = date.today().isoformat()
+    quarter_label = config["jira"]["current_quarter"]
+    total_teams   = len(team_summaries)
+    slipping_teams = [t for t in team_summaries if t["any_slipping"]]
+
+    # ── header ───────────────────────────────────────────────────────────
+    print()
+    print(SEPARATOR)
+    print(f"  WEEKLY COMMITMENT REPORT")
+    print(f"  {today}  |  {quarter_label}")
+    print(f"  Quarter progress: {_progress_bar(quarter_pct)} {quarter_pct*100:.1f}%")
+    print(f"  Teams: {total_teams} total, {len(slipping_teams)} with slipping epics")
+    print(SEPARATOR)
+
+    # ── per-team sections ─────────────────────────────────────────────────
+    for team in team_summaries:
+        epics        = team["epics"]
+        n_slipping   = sum(1 for e in epics if e["slipping"])
+        n_unestimated = sum(1 for e in epics if e["progress"]["unestimated"])
+        n_on_track   = len(epics) - n_slipping - n_unestimated
+
+        print()
+        print(f"  ── {team['name']}  ({len(epics)} epic(s)  |  "
+              f"{n_on_track} on track  "
+              f"{n_slipping} slipping  "
+              f"{n_unestimated} unestimated)")
+        print()
+
+        for ikey, isummary, iepics in _group_by_initiative(epics):
+            label = (
+                f"{ikey}  {isummary[:55]}" if ikey
+                else "(no parent initiative)"
+            )
+            print(f"    ·· {label}")
+            print()
+
+            for epic in iepics:
+                prog = epic["progress"]
+
+                if prog["unestimated"]:
+                    tag = "  ⚠  UNESTIMATED"
+                elif epic["slipping"]:
+                    tag = "  ⚠  SLIPPING"
+                else:
+                    tag = "  ✓  on track"
+
+                bar  = _progress_bar(prog["pct_complete"])
+                pct  = prog["pct_complete"] * 100
+                pts  = f"{prog['done_pts']:.0f}/{prog['total_pts']:.0f} pts"
+                iss  = f"{prog['done_issues']}/{prog['total_issues']} issues"
+
+                print(f"      {epic['key']:14s} {bar} {pct:5.1f}%  ({pts}, {iss}){tag}")
+                print(f"      {'':14s} {epic['summary'][:60]}")
+            print()
+
+        # ── draft message ─────────────────────────────────────────────
+        if team["any_slipping"]:
+            slipping_epics = [e for e in epics if e["slipping"]]
+            msg = draft_message(
+                team_name      = team["name"],
+                em_slack_id    = team["em_slack_id"],
+                sem_slack_id   = team["sem_slack_id"],
+                slipping_epics = [{"key": e["key"], "summary": e["summary"]}
+                                   for e in slipping_epics],
+                quarter_pct    = quarter_pct,
+            )
+            print()
+            print(f"    {SUBSEP[:66]}")
+            print(f"    DRAFT — paste into a Slack DM with "
+                  f"<@{team['em_slack_id']}> and <@{team['sem_slack_id']}>")
+            print(f"    {SUBSEP[:66]}")
+            for line in msg.splitlines():
+                print(f"    {line}")
+            print(f"    {SUBSEP[:66]}")
+
+    # ── summary footer ────────────────────────────────────────────────────
+    print()
+    print(SEPARATOR)
+    if slipping_teams:
+        print(f"  ACTION NEEDED: {len(slipping_teams)} team(s) require outreach:")
+        for t in slipping_teams:
+            n = sum(1 for e in t["epics"] if e["slipping"])
+            print(f"    • {t['name']} ({n} slipping epic(s))")
+    else:
+        print("  All teams on track — no outreach needed this week.")
+    print(SEPARATOR)
+    print()
+
+
+def write_markdown_report(team_summaries, quarter_pct, config, path=None):
+    """Write the weekly commitment report to a Markdown file.
+
+    Args:
+        team_summaries: same structure as print_report()
+        quarter_pct:    float — fraction of the quarter elapsed
+        config:         parsed config dict
+        path:           output file path (str or Path).  Defaults to
+                        report-YYYY-MM-DD.md in the current directory.
+
+    Returns:
+        Path: the file that was written
+    """
+    today         = date.today()
+    quarter_label = config["jira"]["current_quarter"]
+    base_url      = config["jira"]["base_url"].rstrip("/")
+    slipping_teams = [t for t in team_summaries if t["any_slipping"]]
+
+    if path is None:
+        path = Path(f"report-{today.isoformat()}.md")
+    else:
+        path = Path(path)
+
+    lines = []
+
+    def w(text=""):
+        lines.append(text)
+
+    # ── header ────────────────────────────────────────────────────────────
+    w(f"# Weekly Commitment Report")
+    w()
+    w(f"**Date:** {today.isoformat()} &nbsp;|&nbsp; **Quarter:** {quarter_label}  ")
+    w(f"**Quarter elapsed:** {quarter_pct*100:.1f}%  ")
+    w(f"**Teams:** {len(team_summaries)} total &nbsp;|&nbsp; "
+      f"{len(slipping_teams)} with slipping epics")
+    w()
+    w("---")
+
+    # ── per-team sections ─────────────────────────────────────────────────
+    for team in team_summaries:
+        epics         = team["epics"]
+        n_slipping    = sum(1 for e in epics if e["slipping"])
+        n_unestimated = sum(1 for e in epics if e["progress"]["unestimated"])
+        n_on_track    = len(epics) - n_slipping - n_unestimated
+
+        w()
+        w(f"## {team['name']}")
+        w()
+        w(f"{len(epics)} epic(s) &nbsp;·&nbsp; "
+          f"{n_on_track} on track &nbsp;·&nbsp; "
+          f"{n_slipping} slipping &nbsp;·&nbsp; "
+          f"{n_unestimated} unestimated")
+        w()
+
+        if epics:
+            for ikey, isummary, iepics in _group_by_initiative(epics):
+                if ikey:
+                    ilink = f"[{ikey}]({base_url}/browse/{ikey})"
+                    w(f"### {ilink} — {isummary}")
+                else:
+                    w("### (no parent initiative)")
+                w()
+                w("| Epic | Summary | Progress | Status |")
+                w("|------|---------|----------|--------|")
+                for epic in iepics:
+                    prog = epic["progress"]
+                    link = f"[{epic['key']}]({base_url}/browse/{epic['key']})"
+                    bar  = _progress_bar(prog["pct_complete"])
+                    pct  = f"{prog['pct_complete']*100:.1f}%"
+                    pts  = f"{prog['done_pts']:.0f}/{prog['total_pts']:.0f} pts"
+                    iss  = f"{prog['done_issues']}/{prog['total_issues']} issues"
+                    detail = f"{bar} {pct} ({pts}, {iss})"
+
+                    if prog["unestimated"]:
+                        status = "⚠ UNESTIMATED"
+                    elif epic["slipping"]:
+                        status = "⚠ SLIPPING"
+                    else:
+                        status = "✓ on track"
+
+                    # Escape pipe chars in summary so they don't break the table
+                    summary = epic["summary"].replace("|", "\\|")
+                    w(f"| {link} | {summary} | {detail} | {status} |")
+                w()
+
+        # ── draft message ─────────────────────────────────────────────────
+        if team["any_slipping"]:
+            slipping_epics = [e for e in epics if e["slipping"]]
+            msg = draft_message(
+                team_name      = team["name"],
+                em_slack_id    = team["em_slack_id"],
+                sem_slack_id   = team["sem_slack_id"],
+                slipping_epics = [{"key": e["key"], "summary": e["summary"]}
+                                   for e in slipping_epics],
+                quarter_pct    = quarter_pct,
+            )
+            w()
+            w(f"**Draft Slack message** — "
+              f"DM `<@{team['em_slack_id']}>` and `<@{team['sem_slack_id']}>`")
+            w()
+            w("```")
+            w(msg)
+            w("```")
+
+        w()
+        w("---")
+
+    # ── summary footer ────────────────────────────────────────────────────
+    w()
+    w("## Summary")
+    w()
+    if slipping_teams:
+        w(f"**{len(slipping_teams)} team(s) require outreach:**")
+        w()
+        for t in slipping_teams:
+            n = sum(1 for e in t["epics"] if e["slipping"])
+            w(f"- {t['name']} ({n} slipping epic(s))")
+    else:
+        w("All teams on track — no outreach needed this week. ✓")
+
+    path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    return path

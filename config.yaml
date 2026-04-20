@@ -1,0 +1,92 @@
+jira:
+  # Your Jira Cloud base URL (no trailing slash)
+  base_url: "https://paylocity.atlassian.net"
+
+  # Your Atlassian account email
+  email: "dschiff1@paylocity.com"
+
+  # Name of the environment variable holding your Jira API token.
+  # Generate one at: https://id.atlassian.com/manage-profile/security/api-tokens
+  # Never put the token value here — set it in your shell: export JIRA_API_TOKEN=...
+  api_token_env: "JIRA_API_TOKEN"
+
+  # JQL field ID for the "Committed Quarter" dropdown on Epics
+  committed_quarter_field: "cf[11245]"
+
+  # JQL field ID for the team custom field
+  team_field: "cf[10817]"
+
+  # Custom field key for story points (default is customfield_10016 in most Jira configs)
+  story_points_field: "customfield_10034"
+
+  # The exact dropdown value used in Jira to mark an Epic as committed this quarter
+  current_quarter: "FY26 Quarter 4"
+
+  # How child issues are linked to their Epic.
+  # Use "parent" for next-gen (team-managed) projects.
+  # Use "epic_link" for classic (company-managed) projects.
+  epic_link_mode: "parent"
+
+slack:
+  # Name of the environment variable holding your Slack bot token (starts with xoxb-).
+  # Required bot scopes: conversations:write, im:write, mpim:write
+  # Never put the token value here — set it in your shell: export SLACK_BOT_TOKEN=...
+  bot_token_env: "SLACK_BOT_TOKEN"
+
+  # Your Slack workspace ID (starts with T). Find it at:
+  # Slack → your workspace menu → Settings & administration → Workspace settings → look in the URL
+  workspace_id: "T036VU9D1"
+
+quarter:
+  # First and last day of the current quarter (inclusive), ISO format
+  start: "2026-04-01"
+  end: "2026-06-30"
+
+# Fraction behind the linear burn-down target that triggers a slippage flag.
+# 0.10 means: only flag if the team is more than 10 percentage points behind target.
+slippage_threshold: 0.10
+
+# One entry per team. team_field_value must match the exact value of cf[10817] in Jira.
+# em_slack_id and sem_slack_id are Slack member IDs (User IDs, start with U or W).
+# To find a Slack user ID: open their profile → "..." menu → Copy member ID.
+teams:
+  - name: "Recruiting"
+    team_field_value: "Recruiting"       # exact cf[10817] value in Jira
+    em_slack_id: "U0EG2DG5U"        # Engineering Manager Slack user ID
+    # missing Cory here
+    sem_slack_id: "U0ADRG6EZ37"       # Senior Engineering Manager Slack user ID
+
+  - name: "Onboarding"
+    team_field_value: "Onboarding"
+    em_slack_id: "U246ZD0KX"
+    sem_slack_id: "U0ADRG6EZ37"
+
+  - name: "Learning Management"
+    team_field_value: "Learning"
+    em_slack_id: "U01B71GE77B"
+    sem_slack_id: "UA7Q6TGQ0"
+
+  - name: "Performance Management"
+    team_field_value: "Performance"
+    em_slack_id: "U0CR05ZNF"
+    sem_slack_id: "UA7Q6TGQ0"
+
+  - name: "Compensation Management"
+    team_field_value: "Compensation"
+    em_slack_id: "U1M6YS0LF"
+    sem_slack_id: "UA7Q6TGQ0"
+
+  - name: "Market Pay"
+    team_field_value: "Market Pay"
+    em_slack_id: "U1M6YS0LF"
+    sem_slack_id: "UA7Q6TGQ0"
+
+  - name: "Recognition and Rewards"
+    team_field_value: "Recognition & Rewards"
+    em_slack_id: "URFLTH05N"
+    sem_slack_id: "UA7Q6TGQ0"
+
+  - name: "Employee Voice"
+    team_field_value: "Employee Voice"
+    em_slack_id: "U87ABH129"
+    sem_slack_id: "UA7Q6TGQ0"
