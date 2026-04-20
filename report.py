@@ -121,15 +121,18 @@ def _render_team_lines(team, quarter_pct, config, *, initiative_hlevel=3, includ
                 w(f"| {link} | {summary} | {detail} | {status} |")
             w()
 
-    if include_draft and team["any_slipping"]:
-        slipping_epics = [e for e in epics if e["slipping"]]
+    if include_draft and team["any_needs_attention"]:
+        slipping_epics    = [e for e in epics if e["slipping"]]
+        unestimated_epics = [e for e in epics if e["progress"]["unestimated"]]
         msg = draft_message(
-            team_name      = team["name"],
-            em_slack_id    = team["em_slack_id"],
-            sem_slack_id   = team["sem_slack_id"],
-            slipping_epics = [{"key": e["key"], "summary": e["summary"]}
-                               for e in slipping_epics],
-            quarter_pct    = quarter_pct,
+            team_name         = team["name"],
+            em_slack_id       = team["em_slack_id"],
+            sem_slack_id      = team["sem_slack_id"],
+            slipping_epics    = [{"key": e["key"], "summary": e["summary"]}
+                                  for e in slipping_epics],
+            unestimated_epics = [{"key": e["key"], "summary": e["summary"]}
+                                  for e in unestimated_epics],
+            quarter_pct       = quarter_pct,
         )
         w()
         w(f"**Draft Slack message** — "
@@ -161,7 +164,7 @@ def print_report(team_summaries, quarter_pct, config):
     today        = date.today().isoformat()
     quarter_label = config["jira"]["current_quarter"]
     total_teams   = len(team_summaries)
-    slipping_teams = [t for t in team_summaries if t["any_slipping"]]
+    attention_teams = [t for t in team_summaries if t["any_needs_attention"]]
 
     # ── header ───────────────────────────────────────────────────────────
     print()
@@ -169,7 +172,7 @@ def print_report(team_summaries, quarter_pct, config):
     print(f"  WEEKLY COMMITMENT REPORT")
     print(f"  {today}  |  {quarter_label}")
     print(f"  Quarter progress: {_progress_bar(quarter_pct)} {quarter_pct*100:.1f}%")
-    print(f"  Teams: {total_teams} total, {len(slipping_teams)} with slipping epics")
+    print(f"  Teams: {total_teams} total, {len(attention_teams)} requiring outreach")
     print(SEPARATOR)
 
     # ── per-team sections ─────────────────────────────────────────────────
@@ -214,15 +217,18 @@ def print_report(team_summaries, quarter_pct, config):
             print()
 
         # ── draft message ─────────────────────────────────────────────
-        if team["any_slipping"]:
-            slipping_epics = [e for e in epics if e["slipping"]]
+        if team["any_needs_attention"]:
+            slipping_epics    = [e for e in epics if e["slipping"]]
+            unestimated_epics = [e for e in epics if e["progress"]["unestimated"]]
             msg = draft_message(
-                team_name      = team["name"],
-                em_slack_id    = team["em_slack_id"],
-                sem_slack_id   = team["sem_slack_id"],
-                slipping_epics = [{"key": e["key"], "summary": e["summary"]}
-                                   for e in slipping_epics],
-                quarter_pct    = quarter_pct,
+                team_name         = team["name"],
+                em_slack_id       = team["em_slack_id"],
+                sem_slack_id      = team["sem_slack_id"],
+                slipping_epics    = [{"key": e["key"], "summary": e["summary"]}
+                                      for e in slipping_epics],
+                unestimated_epics = [{"key": e["key"], "summary": e["summary"]}
+                                      for e in unestimated_epics],
+                quarter_pct       = quarter_pct,
             )
             print()
             print(f"    {SUBSEP[:66]}")
@@ -236,11 +242,17 @@ def print_report(team_summaries, quarter_pct, config):
     # ── summary footer ────────────────────────────────────────────────────
     print()
     print(SEPARATOR)
-    if slipping_teams:
-        print(f"  ACTION NEEDED: {len(slipping_teams)} team(s) require outreach:")
-        for t in slipping_teams:
-            n = sum(1 for e in t["epics"] if e["slipping"])
-            print(f"    • {t['name']} ({n} slipping epic(s))")
+    if attention_teams:
+        print(f"  ACTION NEEDED: {len(attention_teams)} team(s) require outreach:")
+        for t in attention_teams:
+            n_slip = sum(1 for e in t["epics"] if e["slipping"])
+            n_unest = sum(1 for e in t["epics"] if e["progress"]["unestimated"])
+            parts = []
+            if n_slip:
+                parts.append(f"{n_slip} slipping")
+            if n_unest:
+                parts.append(f"{n_unest} unestimated")
+            print(f"    • {t['name']} ({', '.join(parts)})")
     else:
         print("  All teams on track — no outreach needed this week.")
     print(SEPARATOR)
@@ -262,7 +274,8 @@ def write_markdown_report(team_summaries, quarter_pct, config, path=None):
     """
     today         = date.today()
     quarter_label = config["jira"]["current_quarter"]
-    slipping_teams = [t for t in team_summaries if t["any_slipping"]]
+    slipping_teams  = [t for t in team_summaries if t["any_slipping"]]
+    attention_teams = [t for t in team_summaries if t["any_needs_attention"]]
 
     if path is None:
         path = Path(f"report-{today.isoformat()}.md")
@@ -280,7 +293,7 @@ def write_markdown_report(team_summaries, quarter_pct, config, path=None):
     w(f"**Date:** {today.isoformat()} &nbsp;|&nbsp; **Quarter:** {quarter_label}  ")
     w(f"**Quarter elapsed:** {quarter_pct*100:.1f}%  ")
     w(f"**Teams:** {len(team_summaries)} total &nbsp;|&nbsp; "
-      f"{len(slipping_teams)} with slipping epics")
+      f"{len(attention_teams)} requiring outreach")
     w()
     w("---")
 
@@ -296,12 +309,18 @@ def write_markdown_report(team_summaries, quarter_pct, config, path=None):
     w()
     w("## Summary")
     w()
-    if slipping_teams:
-        w(f"**{len(slipping_teams)} team(s) require outreach:**")
+    if attention_teams:
+        w(f"**{len(attention_teams)} team(s) require outreach:**")
         w()
-        for t in slipping_teams:
-            n = sum(1 for e in t["epics"] if e["slipping"])
-            w(f"- {t['name']} ({n} slipping epic(s))")
+        for t in attention_teams:
+            n_slip  = sum(1 for e in t["epics"] if e["slipping"])
+            n_unest = sum(1 for e in t["epics"] if e["progress"]["unestimated"])
+            parts = []
+            if n_slip:
+                parts.append(f"{n_slip} slipping")
+            if n_unest:
+                parts.append(f"{n_unest} unestimated")
+            w(f"- {t['name']} ({', '.join(parts)})")
     else:
         w("All teams on track — no outreach needed this week. ✓")
 
@@ -324,7 +343,7 @@ def write_slack_drafts(team_summaries, quarter_pct, config, path=None):
     """
     today          = date.today()
     quarter_label  = config["jira"]["current_quarter"]
-    slipping_teams = [t for t in team_summaries if t["any_slipping"]]
+    attention_teams = [t for t in team_summaries if t["any_needs_attention"]]
 
     if path is None:
         path = Path(f"slack-drafts-{today.isoformat()}.md")
@@ -342,21 +361,24 @@ def write_slack_drafts(team_summaries, quarter_pct, config, path=None):
     w(f"**Quarter elapsed:** {quarter_pct*100:.1f}%")
     w()
 
-    if not slipping_teams:
+    if not attention_teams:
         w("All teams on track — no outreach needed this week. ✓")
     else:
-        w(f"{len(slipping_teams)} team(s) require outreach.")
+        w(f"{len(attention_teams)} team(s) require outreach.")
         w()
         w("---")
-        for team in slipping_teams:
-            slipping_epics = [e for e in team["epics"] if e["slipping"]]
+        for team in attention_teams:
+            slipping_epics    = [e for e in team["epics"] if e["slipping"]]
+            unestimated_epics = [e for e in team["epics"] if e["progress"]["unestimated"]]
             msg = draft_message(
-                team_name      = team["name"],
-                em_slack_id    = team["em_slack_id"],
-                sem_slack_id   = team["sem_slack_id"],
-                slipping_epics = [{"key": e["key"], "summary": e["summary"]}
-                                   for e in slipping_epics],
-                quarter_pct    = quarter_pct,
+                team_name         = team["name"],
+                em_slack_id       = team["em_slack_id"],
+                sem_slack_id      = team["sem_slack_id"],
+                slipping_epics    = [{"key": e["key"], "summary": e["summary"]}
+                                      for e in slipping_epics],
+                unestimated_epics = [{"key": e["key"], "summary": e["summary"]}
+                                      for e in unestimated_epics],
+                quarter_pct       = quarter_pct,
             )
             w()
             w(f"## {team['name']}")

@@ -14,7 +14,9 @@ DM `<@U0EG2DG5U>` and `<@U0ADRG6EZ37>`
 ```
 Hi <@U0EG2DG5U> and <@U0ADRG6EZ37>,
 
-Doing my weekly check-in on quarterly commitments. The *Recruiting* team is currently behind the expected burn-down rate (21% through the quarter) on the following commitment(s):
+Doing my weekly check-in on quarterly commitments for the *Recruiting* team (21% through the quarter).
+
+The following commitment(s) are currently behind the expected burn-down rate:
 
   • RC-914: AI Candidate Fit: Candidate Fit Scoring (M3)
 
@@ -35,11 +37,17 @@ DM `<@U01B71GE77B>` and `<@UA7Q6TGQ0>`
 ```
 Hi <@U01B71GE77B> and <@UA7Q6TGQ0>,
 
-Doing my weekly check-in on quarterly commitments. The *Learning Management* team is currently behind the expected burn-down rate (21% through the quarter) on the following commitment(s):
+Doing my weekly check-in on quarterly commitments for the *Learning Management* team (21% through the quarter).
+
+The following commitment(s) are currently behind the expected burn-down rate:
 
   • LMS-16534: FY26H2 - Security + AppSec Tickets
   • LMS-16528: FY26H2 Product Team To-Dos
   • LMS-16527: FY26H2 - Enhancements
+
+The following commitment(s) don't have story point estimates yet. Anything committed for the quarter should be estimated so we can track progress:
+
+  • LMS-16739: UHeader Implementation - LMS
 
 A few questions:
   1. Are you still on track to deliver these by end of quarter?
@@ -58,9 +66,15 @@ DM `<@U0CR05ZNF>` and `<@UA7Q6TGQ0>`
 ```
 Hi <@U0CR05ZNF> and <@UA7Q6TGQ0>,
 
-Doing my weekly check-in on quarterly commitments. The *Performance Management* team is currently behind the expected burn-down rate (21% through the quarter) on the following commitment(s):
+Doing my weekly check-in on quarterly commitments for the *Performance Management* team (21% through the quarter).
+
+The following commitment(s) are currently behind the expected burn-down rate:
 
   • PAC-2646: PM FY26Q4 Tech Debt
+
+The following commitment(s) don't have story point estimates yet. Anything committed for the quarter should be estimated so we can track progress:
+
+  • PAC-2337: Performance: Qase level 2
 
 A few questions:
   1. Are you still on track to deliver these by end of quarter?
@@ -79,7 +93,9 @@ DM `<@U1M6YS0LF>` and `<@UA7Q6TGQ0>`
 ```
 Hi <@U1M6YS0LF> and <@UA7Q6TGQ0>,
 
-Doing my weekly check-in on quarterly commitments. The *Compensation Management* team is currently behind the expected burn-down rate (21% through the quarter) on the following commitment(s):
+Doing my weekly check-in on quarterly commitments for the *Compensation Management* team (21% through the quarter).
+
+The following commitment(s) are currently behind the expected burn-down rate:
 
   • CMGSD-10226: Compensation Management RTB FY26Q4
   • CMGSD-9406: [4/29/26] Remove Lightcast data and experiences for contractual obligations

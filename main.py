@@ -171,6 +171,10 @@ def build_summaries_from_raw(raw_data, config, quarter_pct):
             "sem_slack_id": team_data["sem_slack_id"],
             "epics":        enriched,
             "any_slipping": any(e["slipping"] for e in enriched),
+            "any_needs_attention": any(
+                e["slipping"] or e["progress"]["unestimated"]
+                for e in enriched
+            ),
         })
 
     return summaries
