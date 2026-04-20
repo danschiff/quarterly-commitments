@@ -20,7 +20,7 @@ import yaml
 
 import jira_client as jc
 from progress import quarter_pct_elapsed, epic_progress, is_slipping
-from report import print_report, write_markdown_report
+from report import print_report, write_markdown_report, write_per_team_reports, write_slack_drafts
 
 
 # ---------------------------------------------------------------------------
@@ -181,6 +181,11 @@ def build_summaries_from_raw(raw_data, config, quarter_pct):
 # ---------------------------------------------------------------------------
 
 def main():
+    # Windows consoles default to cp1252 which can't encode the block-bar
+    # characters (█ ░) used in the progress display.
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+
     parser = argparse.ArgumentParser(
         description="Weekly commitment tracker — generate slippage report from Jira."
     )
@@ -217,6 +222,10 @@ def main():
     print_report(summaries, quarter_pct, config)
     md_path = write_markdown_report(summaries, quarter_pct, config)
     print(f"Markdown report written to: {md_path.resolve()}")
+    team_paths = write_per_team_reports(summaries, quarter_pct, config)
+    print(f"Per-team reports written to: reports/{date.today().isoformat()}/ ({len(team_paths)} files)")
+    drafts_path = write_slack_drafts(summaries, quarter_pct, config)
+    print(f"Slack drafts written to: {drafts_path.resolve()}")
 
 
 if __name__ == "__main__":

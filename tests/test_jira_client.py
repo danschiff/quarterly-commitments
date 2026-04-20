@@ -1,4 +1,4 @@
-"""Tests for jira_client.py.
+﻿"""Tests for jira_client.py.
 
 All HTTP calls are mocked — no real Jira connection is made.
 Run with:  python -m pytest tests/ -v
@@ -41,16 +41,6 @@ def _mock_response(data, status_code=200):
     resp.json.return_value = data
     resp.raise_for_status.return_value = None
     return resp
-
-
-def _mock_session(post_return=None, post_side_effect=None):
-    """Return a MagicMock session whose .post() is pre-configured."""
-    session = MagicMock()
-    if post_side_effect is not None:
-        session.post.side_effect = post_side_effect
-    else:
-        session.post.return_value = post_return
-    return session
 
 
 def _mock_session(post_return=None, post_side_effect=None):
@@ -126,7 +116,17 @@ class TestGetAuth(unittest.TestCase):
 
 # ---------------------------------------------------------------------------
 # _search_jql  (pagination)
-# ----------------------_make_session")
+# ---------------------------------------------------------------------------
+
+class TestSearchJql(unittest.TestCase):
+
+    def setUp(self):
+        os.environ["TEST_JIRA_TOKEN"] = "token123"
+
+    def tearDown(self):
+        os.environ.pop("TEST_JIRA_TOKEN", None)
+
+    @patch("jira_client._make_session")
     def test_single_page(self, mock_make_session):
         session = _mock_session(_mock_response({"issues": [{"key": "A-1"}, {"key": "A-2"}], "isLast": True}))
         mock_make_session.return_value = session
@@ -183,7 +183,6 @@ class TestGetAuth(unittest.TestCase):
 
         _, kwargs = session.post.call_args
         self.assertEqual(
-            session.rtEqual(
             session.post.call_args[0][0],
             "https://test.atlassian.net/rest/api/3/search/jql",
         )
@@ -212,7 +211,8 @@ class TestFetchCommittedEpics(unittest.TestCase):
                 "parent": parent,
             },
         }
-_make_session")
+
+    @patch("jira_client._make_session")
     def test_returns_mapped_epics(self, mock_make_session):
         session = _mock_session(_mock_response({
             "issues": [
@@ -274,13 +274,6 @@ _make_session")
             "issues": [{"key": "P-1", "fields": {"summary": "S", "customfield_10817": "Learning", "parent": None}}],
             "isLast": True,
         }))
-        mock_make_session.return_value = session("jira_client._make_session")
-    def test_plain_string_team_field(self, mock_make_session):
-        """Some Jira configs return the team field as a plain string, not an object."""
-        session = _mock_session(_mock_response({
-            "issues": [{"key": "P-1", "fields": {"summary": "S", "customfield_10817": "Learning", "parent": None}}],
-            "isLast": True,
-        }))
         mock_make_session.return_value = session
 
         result = jc.fetch_committed_epics(BASE_CONFIG)
@@ -305,7 +298,13 @@ class TestFetchEpicChildren(unittest.TestCase):
             "fields": {
                 "summary": f"Task {key}",
                 "status": {
-                    "nam_make_session")
+                    "statusCategory": {"key": status_category},
+                },
+                "customfield_10016": story_points,
+            },
+        }
+
+    @patch("jira_client._make_session")
     def test_returns_children_with_correct_fields(self, mock_make_session):
         session = _mock_session(_mock_response({
             "issues": [
@@ -377,19 +376,6 @@ class TestFetchEpicChildren(unittest.TestCase):
                 },
             }],
             "isLast": True,
-        }))
-        mock_make_session.return_value = session
-
-        result = jc.fetch_epic_children(BASE_CONFIG, "P-5")
-        self.assertEqual(result[0]["status_category"], "new")
-
-    @patch("jira_client._make_session")
-    def test_story_points_field_included_in_request(self, mock_make_session):
-        session = _mock_session(_mock_response({"issues": [], "isLast": True}))
-        mock_make_session.return_value = session
-        jc.fetch_epic_children(BASE_CONFIG, "P-5")
-
-        body = session.: True,
         }))
         mock_make_session.return_value = session
 

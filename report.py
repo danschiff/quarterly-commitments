@@ -1,5 +1,6 @@
 """Terminal report renderer for the weekly commitment tracker."""
 
+import re
 from datetime import date
 from pathlib import Path
 
@@ -45,6 +46,100 @@ def _group_by_initiative(epics):
         (k, groups[k]["summary"], groups[k]["epics"])
         for k in order_sorted
     ]
+
+
+def _slugify(name):
+    """Convert a team name to a filesystem-safe slug.
+
+    e.g. "Learning Management"   -> "learning-management"
+         "Recognition & Rewards" -> "recognition-and-rewards"
+    """
+    slug = name.lower()
+    slug = re.sub(r"&", "and", slug)
+    slug = re.sub(r"[^a-z0-9]+", "-", slug)
+    return slug.strip("-")
+
+
+def _render_team_lines(team, quarter_pct, config, *, initiative_hlevel=3, include_draft=False):
+    """Return a list[str] of markdown lines for one team's body section.
+
+    Does NOT include the team-name heading — the caller writes that.
+
+    Args:
+        team:              team summary dict
+        quarter_pct:       float — fraction of the quarter elapsed
+        config:            parsed config dict
+        initiative_hlevel: heading level for initiative headings
+                           (3 in combined report, 2 in per-team files)
+        include_draft:     if True, append the draft Slack message block
+    """
+    base_url          = config["jira"]["base_url"].rstrip("/")
+    epics             = team["epics"]
+    n_slipping        = sum(1 for e in epics if e["slipping"])
+    n_unestimated     = sum(1 for e in epics if e["progress"]["unestimated"])
+    n_on_track        = len(epics) - n_slipping - n_unestimated
+    initiative_prefix = "#" * initiative_hlevel
+
+    lines = []
+
+    def w(text=""):
+        lines.append(text)
+
+    w(f"{len(epics)} epic(s) &nbsp;·&nbsp; "
+      f"{n_on_track} on track &nbsp;·&nbsp; "
+      f"{n_slipping} slipping &nbsp;·&nbsp; "
+      f"{n_unestimated} unestimated")
+    w()
+
+    if epics:
+        for ikey, isummary, iepics in _group_by_initiative(epics):
+            if ikey:
+                ilink = f"[{ikey}]({base_url}/browse/{ikey})"
+                w(f"{initiative_prefix} {ilink} — {isummary}")
+            else:
+                w(f"{initiative_prefix} (no parent initiative)")
+            w()
+            w("| Epic | Summary | Progress | Status |")
+            w("|------|---------|----------|--------|")            
+            for epic in iepics:
+                prog   = epic["progress"]
+                link   = f"[{epic['key']}]({base_url}/browse/{epic['key']})"
+                bar    = _progress_bar(prog["pct_complete"])
+                pct    = f"{prog['pct_complete']*100:.1f}%"
+                pts    = f"{prog['done_pts']:.0f}/{prog['total_pts']:.0f} pts"
+                iss    = f"{prog['done_issues']}/{prog['total_issues']} issues"
+                detail = f"{bar} {pct} ({pts}, {iss})"
+
+                if prog["unestimated"]:
+                    status = "⚠ UNESTIMATED"
+                elif epic["slipping"]:
+                    status = "⚠ SLIPPING"
+                else:
+                    status = "✓ on track"
+
+                summary = epic["summary"].replace("|", "\\|")
+                w(f"| {link} | {summary} | {detail} | {status} |")
+            w()
+
+    if include_draft and team["any_slipping"]:
+        slipping_epics = [e for e in epics if e["slipping"]]
+        msg = draft_message(
+            team_name      = team["name"],
+            em_slack_id    = team["em_slack_id"],
+            sem_slack_id   = team["sem_slack_id"],
+            slipping_epics = [{"key": e["key"], "summary": e["summary"]}
+                               for e in slipping_epics],
+            quarter_pct    = quarter_pct,
+        )
+        w()
+        w(f"**Draft Slack message** — "
+          f"DM `<@{team['em_slack_id']}>` and `<@{team['sem_slack_id']}>`")
+        w()
+        w("```")
+        w(msg)
+        w("```")
+
+    return lines
 
 
 def print_report(team_summaries, quarter_pct, config):
@@ -167,7 +262,6 @@ def write_markdown_report(team_summaries, quarter_pct, config, path=None):
     """
     today         = date.today()
     quarter_label = config["jira"]["current_quarter"]
-    base_url      = config["jira"]["base_url"].rstrip("/")
     slipping_teams = [t for t in team_summaries if t["any_slipping"]]
 
     if path is None:
@@ -192,72 +286,11 @@ def write_markdown_report(team_summaries, quarter_pct, config, path=None):
 
     # ── per-team sections ─────────────────────────────────────────────────
     for team in team_summaries:
-        epics         = team["epics"]
-        n_slipping    = sum(1 for e in epics if e["slipping"])
-        n_unestimated = sum(1 for e in epics if e["progress"]["unestimated"])
-        n_on_track    = len(epics) - n_slipping - n_unestimated
-
         w()
         w(f"## {team['name']}")
         w()
-        w(f"{len(epics)} epic(s) &nbsp;·&nbsp; "
-          f"{n_on_track} on track &nbsp;·&nbsp; "
-          f"{n_slipping} slipping &nbsp;·&nbsp; "
-          f"{n_unestimated} unestimated")
-        w()
-
-        if epics:
-            for ikey, isummary, iepics in _group_by_initiative(epics):
-                if ikey:
-                    ilink = f"[{ikey}]({base_url}/browse/{ikey})"
-                    w(f"### {ilink} — {isummary}")
-                else:
-                    w("### (no parent initiative)")
-                w()
-                w("| Epic | Summary | Progress | Status |")
-                w("|------|---------|----------|--------|")
-                for epic in iepics:
-                    prog = epic["progress"]
-                    link = f"[{epic['key']}]({base_url}/browse/{epic['key']})"
-                    bar  = _progress_bar(prog["pct_complete"])
-                    pct  = f"{prog['pct_complete']*100:.1f}%"
-                    pts  = f"{prog['done_pts']:.0f}/{prog['total_pts']:.0f} pts"
-                    iss  = f"{prog['done_issues']}/{prog['total_issues']} issues"
-                    detail = f"{bar} {pct} ({pts}, {iss})"
-
-                    if prog["unestimated"]:
-                        status = "⚠ UNESTIMATED"
-                    elif epic["slipping"]:
-                        status = "⚠ SLIPPING"
-                    else:
-                        status = "✓ on track"
-
-                    # Escape pipe chars in summary so they don't break the table
-                    summary = epic["summary"].replace("|", "\\|")
-                    w(f"| {link} | {summary} | {detail} | {status} |")
-                w()
-
-        # ── draft message ─────────────────────────────────────────────────
-        if team["any_slipping"]:
-            slipping_epics = [e for e in epics if e["slipping"]]
-            msg = draft_message(
-                team_name      = team["name"],
-                em_slack_id    = team["em_slack_id"],
-                sem_slack_id   = team["sem_slack_id"],
-                slipping_epics = [{"key": e["key"], "summary": e["summary"]}
-                                   for e in slipping_epics],
-                quarter_pct    = quarter_pct,
-            )
-            w()
-            w(f"**Draft Slack message** — "
-              f"DM `<@{team['em_slack_id']}>` and `<@{team['sem_slack_id']}>`")
-            w()
-            w("```")
-            w(msg)
-            w("```")
-
-        w()
-        w("---")
+        for line in _render_team_lines(team, quarter_pct, config, initiative_hlevel=3):
+            w(line)
 
     # ── summary footer ────────────────────────────────────────────────────
     w()
@@ -274,3 +307,133 @@ def write_markdown_report(team_summaries, quarter_pct, config, path=None):
 
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
     return path
+
+
+def write_slack_drafts(team_summaries, quarter_pct, config, path=None):
+    """Write all draft Slack messages for slipping teams to a single file.
+
+    Args:
+        team_summaries: same structure as print_report()
+        quarter_pct:    float — fraction of the quarter elapsed
+        config:         parsed config dict
+        path:           output file path.  Defaults to
+                        slack-drafts-YYYY-MM-DD.md in the current directory.
+
+    Returns:
+        Path: the file that was written
+    """
+    today          = date.today()
+    quarter_label  = config["jira"]["current_quarter"]
+    slipping_teams = [t for t in team_summaries if t["any_slipping"]]
+
+    if path is None:
+        path = Path(f"slack-drafts-{today.isoformat()}.md")
+    else:
+        path = Path(path)
+
+    lines = []
+
+    def w(text=""):
+        lines.append(text)
+
+    w("# Draft Slack Messages")
+    w()
+    w(f"**Date:** {today.isoformat()} &nbsp;|&nbsp; **Quarter:** {quarter_label}  ")
+    w(f"**Quarter elapsed:** {quarter_pct*100:.1f}%")
+    w()
+
+    if not slipping_teams:
+        w("All teams on track — no outreach needed this week. ✓")
+    else:
+        w(f"{len(slipping_teams)} team(s) require outreach.")
+        w()
+        w("---")
+        for team in slipping_teams:
+            slipping_epics = [e for e in team["epics"] if e["slipping"]]
+            msg = draft_message(
+                team_name      = team["name"],
+                em_slack_id    = team["em_slack_id"],
+                sem_slack_id   = team["sem_slack_id"],
+                slipping_epics = [{"key": e["key"], "summary": e["summary"]}
+                                   for e in slipping_epics],
+                quarter_pct    = quarter_pct,
+            )
+            w()
+            w(f"## {team['name']}")
+            w()
+            w(f"DM `<@{team['em_slack_id']}>` and `<@{team['sem_slack_id']}>`")
+            w()
+            w("```")
+            w(msg)
+            w("```")
+            w()
+            w("---")
+
+    path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    return path
+
+
+def write_team_markdown_report(team, quarter_pct, config, path):
+    """Write a single-team commitment report to a Markdown file.
+
+    Args:
+        team:        single team summary dict
+        quarter_pct: float — fraction of the quarter elapsed
+        config:      parsed config dict
+        path:        output file path (str or Path)
+
+    Returns:
+        Path: the file that was written
+    """
+    today         = date.today()
+    quarter_label = config["jira"]["current_quarter"]
+    epics         = team["epics"]
+    n_slipping    = sum(1 for e in epics if e["slipping"])
+    n_unestimated = sum(1 for e in epics if e["progress"]["unestimated"])
+    n_on_track    = len(epics) - n_slipping - n_unestimated
+
+    lines = []
+
+    def w(text=""):
+        lines.append(text)
+
+    w(f"# {team['name']} — Weekly Commitment Report")
+    w()
+    w(f"**Date:** {today.isoformat()} &nbsp;|&nbsp; **Quarter:** {quarter_label}  ")
+    w(f"**Quarter elapsed:** {quarter_pct*100:.1f}%")
+    w()
+    w("---")
+    w()
+    for line in _render_team_lines(team, quarter_pct, config, initiative_hlevel=2):
+        w(line)
+
+    path = Path(path)
+    path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    return path
+
+
+def write_per_team_reports(team_summaries, quarter_pct, config, output_dir=None):
+    """Write one markdown file per team into a dated subdirectory.
+
+    Args:
+        team_summaries: same structure as print_report()
+        quarter_pct:    float — fraction of the quarter elapsed
+        config:         parsed config dict
+        output_dir:     directory to write files into.  Defaults to
+                        reports/YYYY-MM-DD/ in the current directory.
+
+    Returns:
+        list[Path]: files written, one per team
+    """
+    if output_dir is None:
+        output_dir = Path(f"reports/{date.today().isoformat()}")
+    else:
+        output_dir = Path(output_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    paths = []
+    for team in team_summaries:
+        filename = _slugify(team["name"]) + ".md"
+        path = write_team_markdown_report(team, quarter_pct, config, output_dir / filename)
+        paths.append(path)
+    return paths
