@@ -32,6 +32,27 @@ def load_config(path="config.yaml"):
         return yaml.safe_load(f)
 
 
+def _team_managers(team_cfg):
+    """Normalize a team config entry to a list of manager dicts.
+
+    Supports two forms:
+      - new: team_cfg["managers"] is a list of {em_slack_id, sem_slack_id} dicts
+      - legacy: team_cfg["em_slack_id"] + team_cfg["sem_slack_id"] (single manager)
+
+    Returns a list of {em_slack_id, sem_slack_id} dicts (always at least one entry).
+    """
+    managers = team_cfg.get("managers")
+    if managers:
+        return [
+            {"em_slack_id": m["em_slack_id"], "sem_slack_id": m["sem_slack_id"]}
+            for m in managers
+        ]
+    return [{
+        "em_slack_id":  team_cfg["em_slack_id"],
+        "sem_slack_id": team_cfg["sem_slack_id"],
+    }]
+
+
 # ---------------------------------------------------------------------------
 # Jira fetch → raw data
 # ---------------------------------------------------------------------------
@@ -46,8 +67,7 @@ def fetch_raw_data(config):
             {
                 "name": str,
                 "team_field_value": str,
-                "em_slack_id": str,
-                "sem_slack_id": str,
+                "managers": [ {em_slack_id, sem_slack_id}, ... ],
                 "epics": [
                     {
                         "key": str,
@@ -103,8 +123,7 @@ def fetch_raw_data(config):
         teams.append({
             "name":             team_cfg["name"],
             "team_field_value": tv,
-            "em_slack_id":      team_cfg["em_slack_id"],
-            "sem_slack_id":     team_cfg["sem_slack_id"],
+            "managers":         _team_managers(team_cfg),
             "epics":            enriched_epics,
         })
 
@@ -141,6 +160,10 @@ def build_summaries_from_raw(raw_data, config, quarter_pct):
     and write_markdown_report() expect.
     """
     threshold = config["slippage_threshold"]
+    # Manager info is config-only (not Jira data), so always read it from
+    # the current config rather than the (possibly stale) cache. Fall back
+    # to the cache's fields only if the team is missing from config.
+    cfg_by_name = {t["name"]: t for t in config["teams"]}
 
     summaries = []
     for team_data in raw_data["teams"]:
@@ -165,10 +188,19 @@ def build_summaries_from_raw(raw_data, config, quarter_pct):
                 "slipping":          slipping,
             })
 
+        team_cfg = cfg_by_name.get(team_data["name"])
+        if team_cfg is not None:
+            managers = _team_managers(team_cfg)
+        else:
+            # Fall back to cache fields (new 'managers' or legacy single-EM)
+            managers = team_data.get("managers") or [{
+                "em_slack_id":  team_data["em_slack_id"],
+                "sem_slack_id": team_data["sem_slack_id"],
+            }]
+
         summaries.append({
             "name":         team_data["name"],
-            "em_slack_id":  team_data["em_slack_id"],
-            "sem_slack_id": team_data["sem_slack_id"],
+            "managers":     managers,
             "epics":        enriched,
             "any_slipping": any(e["slipping"] for e in enriched),
             "any_needs_attention": any(

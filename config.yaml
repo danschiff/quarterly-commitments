@@ -49,12 +49,25 @@ slippage_threshold: 0.10
 # One entry per team. team_field_value must match the exact value of cf[10817] in Jira.
 # em_slack_id and sem_slack_id are Slack member IDs (User IDs, start with U or W).
 # To find a Slack user ID: open their profile → "..." menu → Copy member ID.
+#
+# Two supported forms per team:
+#   1. Single manager (legacy):
+#        em_slack_id:  "U..."
+#        sem_slack_id: "U..."
+#   2. Multiple managers (use when a team has more than one EM):
+#        managers:
+#          - em_slack_id:  "U..."
+#            sem_slack_id: "U..."
+#          - em_slack_id:  "U..."
+#            sem_slack_id: "U..."
 teams:
   - name: "Recruiting"
     team_field_value: "Recruiting"       # exact cf[10817] value in Jira
-    em_slack_id: "U0EG2DG5U"        # Engineering Manager Slack user ID
-    # missing Cory here
-    sem_slack_id: "U0ADRG6EZ37"       # Senior Engineering Manager Slack user ID
+    managers:
+      - em_slack_id:  "U0EG2DG5U"        # Engineering Manager Slack user ID
+        sem_slack_id: "U0ADRG6EZ37"      # Senior Engineering Manager Slack user ID
+      - em_slack_id:  "U02DG80JZ2S"   # TODO: replace with Cory's Slack user ID
+        sem_slack_id: "U0ADRG6EZ37"
 
   - name: "Onboarding"
     team_field_value: "Onboarding"

@@ -4,11 +4,25 @@ import re
 from datetime import date
 from pathlib import Path
 
-from slack_client import draft_message
+from slack_client import draft_message, _dedupe_manager_ids
 
 BAR_WIDTH = 20
 SEPARATOR = "=" * 70
 SUBSEP    = "-" * 70
+
+
+def _format_dm_ids(managers, backticks=True):
+    """Render `<@A>`, `<@B>`, and `<@C>` (or plain <@A>, ...) for all unique managers."""
+    ids = _dedupe_manager_ids(managers)
+    if backticks:
+        mentions = [f"`<@{sid}>`" for sid in ids]
+    else:
+        mentions = [f"<@{sid}>" for sid in ids]
+    if len(mentions) == 1:
+        return mentions[0]
+    if len(mentions) == 2:
+        return f"{mentions[0]} and {mentions[1]}"
+    return ", ".join(mentions[:-1]) + f", and {mentions[-1]}"
 
 
 def _progress_bar(pct, width=BAR_WIDTH):
@@ -126,8 +140,7 @@ def _render_team_lines(team, quarter_pct, config, *, initiative_hlevel=3, includ
         unestimated_epics = [e for e in epics if e["progress"]["unestimated"]]
         msg = draft_message(
             team_name         = team["name"],
-            em_slack_id       = team["em_slack_id"],
-            sem_slack_id      = team["sem_slack_id"],
+            managers          = team["managers"],
             slipping_epics    = [{"key": e["key"], "summary": e["summary"]}
                                   for e in slipping_epics],
             unestimated_epics = [{"key": e["key"], "summary": e["summary"]}
@@ -135,8 +148,7 @@ def _render_team_lines(team, quarter_pct, config, *, initiative_hlevel=3, includ
             quarter_pct       = quarter_pct,
         )
         w()
-        w(f"**Draft Slack message** — "
-          f"DM `<@{team['em_slack_id']}>` and `<@{team['sem_slack_id']}>`")
+        w(f"**Draft Slack message** — DM {_format_dm_ids(team['managers'])}")
         w()
         w("```")
         w(msg)
@@ -152,8 +164,7 @@ def print_report(team_summaries, quarter_pct, config):
         team_summaries: list of team dicts produced by main.build_team_summaries()
             Each dict has:
                 name          str
-                em_slack_id   str
-                sem_slack_id  str
+                managers      list of {em_slack_id, sem_slack_id} dicts
                 epics         list of epic dicts, each with:
                                   key, summary, progress (from progress.epic_progress),
                                   slipping (bool)
@@ -222,8 +233,7 @@ def print_report(team_summaries, quarter_pct, config):
             unestimated_epics = [e for e in epics if e["progress"]["unestimated"]]
             msg = draft_message(
                 team_name         = team["name"],
-                em_slack_id       = team["em_slack_id"],
-                sem_slack_id      = team["sem_slack_id"],
+                managers          = team["managers"],
                 slipping_epics    = [{"key": e["key"], "summary": e["summary"]}
                                       for e in slipping_epics],
                 unestimated_epics = [{"key": e["key"], "summary": e["summary"]}
@@ -233,7 +243,7 @@ def print_report(team_summaries, quarter_pct, config):
             print()
             print(f"    {SUBSEP[:66]}")
             print(f"    DRAFT — paste into a Slack DM with "
-                  f"<@{team['em_slack_id']}> and <@{team['sem_slack_id']}>")
+                  f"{_format_dm_ids(team['managers'], backticks=False)}")
             print(f"    {SUBSEP[:66]}")
             for line in msg.splitlines():
                 print(f"    {line}")
@@ -372,8 +382,7 @@ def write_slack_drafts(team_summaries, quarter_pct, config, path=None):
             unestimated_epics = [e for e in team["epics"] if e["progress"]["unestimated"]]
             msg = draft_message(
                 team_name         = team["name"],
-                em_slack_id       = team["em_slack_id"],
-                sem_slack_id      = team["sem_slack_id"],
+                managers          = team["managers"],
                 slipping_epics    = [{"key": e["key"], "summary": e["summary"]}
                                       for e in slipping_epics],
                 unestimated_epics = [{"key": e["key"], "summary": e["summary"]}
@@ -383,7 +392,7 @@ def write_slack_drafts(team_summaries, quarter_pct, config, path=None):
             w()
             w(f"## {team['name']}")
             w()
-            w(f"DM `<@{team['em_slack_id']}>` and `<@{team['sem_slack_id']}>`")
+            w(f"DM {_format_dm_ids(team['managers'])}")
             w()
             w("```")
             w(msg)

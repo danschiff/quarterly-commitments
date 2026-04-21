@@ -6,7 +6,44 @@ open_group_dm() and make_deep_link() to enable one-click DM opening.
 """
 
 
-def draft_message(team_name, em_slack_id, sem_slack_id, slipping_epics, quarter_pct, unestimated_epics=None):
+def _dedupe_manager_ids(managers):
+    """Return a deduped, order-preserving list of Slack IDs: EMs first, then SEMs.
+
+    Each entry in `managers` is a {em_slack_id, sem_slack_id} dict.
+    """
+    ordered = []
+    seen    = set()
+    # First pass: EMs in config order
+    for m in managers:
+        sid = m["em_slack_id"]
+        if sid not in seen:
+            seen.add(sid)
+            ordered.append(sid)
+    # Second pass: SEMs not already listed
+    for m in managers:
+        sid = m["sem_slack_id"]
+        if sid not in seen:
+            seen.add(sid)
+            ordered.append(sid)
+    return ordered
+
+
+def _join_mentions(slack_ids):
+    """Render a list of Slack IDs as an English-joined <@...> string.
+
+    1 id  -> "<@A>"
+    2 ids -> "<@A> and <@B>"
+    3+    -> "<@A>, <@B>, and <@C>"
+    """
+    mentions = [f"<@{sid}>" for sid in slack_ids]
+    if len(mentions) == 1:
+        return mentions[0]
+    if len(mentions) == 2:
+        return f"{mentions[0]} and {mentions[1]}"
+    return ", ".join(mentions[:-1]) + f", and {mentions[-1]}"
+
+
+def draft_message(team_name, managers, slipping_epics, quarter_pct, unestimated_epics=None):
     """Return a ready-to-paste Slack message for a team needing attention.
 
     The <@USER_ID> syntax renders as a clickable @mention when pasted
@@ -14,8 +51,7 @@ def draft_message(team_name, em_slack_id, sem_slack_id, slipping_epics, quarter_
 
     Args:
         team_name:         str   — display name of the team
-        em_slack_id:       str   — Slack user ID of the Engineering Manager
-        sem_slack_id:      str   — Slack user ID of the Senior Engineering Manager
+        managers:          list  — [{em_slack_id, sem_slack_id}, ...] (1 or more)
         slipping_epics:    list  — epic dicts with keys "key" and "summary"
         quarter_pct:       float — fraction of quarter elapsed (e.g. 0.211)
         unestimated_epics: list  — epic dicts with keys "key" and "summary" (optional)
@@ -27,10 +63,12 @@ def draft_message(team_name, em_slack_id, sem_slack_id, slipping_epics, quarter_
         unestimated_epics = []
 
     pct_str = f"{quarter_pct * 100:.0f}%"
+    greeting_ids = _dedupe_manager_ids(managers)
+    greeting = _join_mentions(greeting_ids)
     parts = []
 
     parts.append(
-        f"Hi <@{em_slack_id}> and <@{sem_slack_id}>,\n\n"
+        f"Hi {greeting},\n\n"
         f"Doing my weekly check-in on quarterly commitments for the *{team_name}* team "
         f"({pct_str} through the quarter)."
     )

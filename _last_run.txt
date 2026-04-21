@@ -1,0 +1,354 @@
+﻿Using cached data from data-2026-04-20.json
+
+======================================================================
+  WEEKLY COMMITMENT REPORT
+  2026-04-21  |  FY26 Quarter 4
+  Quarter progress: [ΓûêΓûêΓûêΓûêΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæ] 22.2%
+  Teams: 8 total, 4 requiring outreach
+======================================================================
+
+  ΓöÇΓöÇ Recruiting  (13 epic(s)  |  12 on track  1 slipping  0 unestimated)
+
+    ┬╖┬╖ PCS-3060  Externalize Recruiting APIs in  Marketplace 
+
+      RC-1899        [ΓûêΓûêΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæ]  12.2%  (11/90 pts, 2/17 issues)  Γ£ô  on track
+                      Move from Indeed XML feed to Job Sync API
+
+    ┬╖┬╖ PCS-3170  Indeed Integration Enhancements 
+
+      RC-44          [ΓûêΓûêΓûêΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæ]  17.2%  (5/29 pts, 2/7 issues)  Γ£ô  on track
+                     collecting and passing email values to Indeed feed and sendi
+
+    ┬╖┬╖ PCS-3271  AI Ignite - Recruiting Agent  (Talent Rediscovery & Res
+
+      RC-1955        [ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûê] 100.0%  (6/6 pts, 3/4 issues)  Γ£ô  on track
+                     AI Rediscovery Agent: Permissions and Settings (M1)
+      RC-1390        [ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûæΓûæΓûæΓûæΓûæ]  73.7%  (14/19 pts, 4/6 issues)  Γ£ô  on track
+                     AI Rediscovery Agent: Resume Summarization (M1)
+      RC-922         [ΓûêΓûêΓûêΓûêΓûêΓûêΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæ]  29.2%  (7/24 pts, 2/7 issues)  Γ£ô  on track
+                     New Standard "Sourced" Status/Stage for Recruiting (M1)
+
+    ┬╖┬╖ PCS-3272  AI Ignite - Recruiting Agent (Candidate Fit)
+
+      RC-1923        [ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûæΓûæ]  91.4%  (32/35 pts, 9/10 issues)  Γ£ô  on track
+                     AI Candidate Fit:  Settings & Permissions (M1)
+      RC-1921        [ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæ]  46.7%  (14/30 pts, 4/7 issues)  Γ£ô  on track
+                     Enhanced Candidate Search (M2)
+      RC-1920        [ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûæΓûæΓûæΓûæ]  79.3%  (65/82 pts, 16/25 issues)  Γ£ô  on track
+                     AI Candidate Fit: Agent Setup (M1)
+      RC-1845        [ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæ]  32.9%  (26/79 pts, 11/30 issues)  Γ£ô  on track
+                     AI Candidate Fit: Job Folder Citrus 7 (M2)
+      RC-1588        [ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûê] 100.0%  (25/25 pts, 9/9 issues)  Γ£ô  on track
+                     AI Candidate Fit: Infrastructure Setup (M1)
+      RC-914         [ΓûêΓûêΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæ]   8.1%  (3/37 pts, 1/18 issues)  ΓÜá  SLIPPING
+                     AI Candidate Fit: Candidate Fit Scoring (M3)
+
+    ┬╖┬╖ PCS-4067  H2 Client Retention PDRs
+
+      RC-1886        [ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûæΓûæΓûæ]  86.0%  (49/57 pts, 16/18 issues)  Γ£ô  on track
+                     Candidate Profile Post Launch Monitoring
+      RC-1624        [ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæ]  48.4%  (30/62 pts, 10/20 issues)  Γ£ô  on track
+                     FY26 Q4 High/Critical PDRs
+
+
+    ------------------------------------------------------------------
+    DRAFT ΓÇö paste into a Slack DM with <@U0EG2DG5U> and <@U0ADRG6EZ37>
+    ------------------------------------------------------------------
+    Hi <@U0EG2DG5U> and <@U0ADRG6EZ37>,
+    
+    Doing my weekly check-in on quarterly commitments for the *Recruiting* team (22% through the quarter).
+    
+    The following commitment(s) are currently behind the expected burn-down rate:
+    
+      ΓÇó RC-914: AI Candidate Fit: Candidate Fit Scoring (M3)
+    
+    A few questions:
+      1. Are you still on track to deliver these by end of quarter?
+      2. Are there any blockers I should know about?
+      3. Is there anything you need help with?
+    
+    Thanks!
+    ------------------------------------------------------------------
+
+  ΓöÇΓöÇ Onboarding  (11 epic(s)  |  11 on track  0 slipping  0 unestimated)
+
+    ┬╖┬╖ PCS-2804  Client retention PDRΓÇÖs
+
+      IN-9020        [ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûæΓûæΓûæΓûæΓûæΓûæΓûæ]  63.1%  (41/65 pts, 8/15 issues)  Γ£ô  on track
+                     Q4 Client Retention PDR Initiative
+
+    ┬╖┬╖ PCS-2990  H2 I9 Issues
+
+      IN-8886        [ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæ]  41.2%  (14/34 pts, 3/10 issues)  Γ£ô  on track
+                     Q4 Fixes for I-9 Post MVP Bugs
+
+    ┬╖┬╖ PCS-422  E-Verify Task & Dashboard
+
+      IN-9355        [ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûæΓûæΓûæ]  84.6%  (44/52 pts, 13/16 issues)  Γ£ô  on track
+                     T: Viewing and Completing Actions in Onboarding's E-Verify T
+      IN-9354        [ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûæΓûæ]  88.0%  (162/184 pts, 36/41 issues)  Γ£ô  on track
+                     T: EΓÇæVerify Case Edit and Submit Actions, Status Sync
+      IN-9352        [ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûê] 100.0%  (3/3 pts, 1/1 issues)  Γ£ô  on track
+                     T: I9 Verification Task Integration
+      IN-9351        [ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæ]  50.0%  (8/16 pts, 3/6 issues)  Γ£ô  on track
+                     T: E-Verify System Down/Slowness
+      IN-9349        [ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûæΓûæΓûæΓûæΓûæΓûæΓûæ]  67.3%  (138/205 pts, 33/52 issues)  Γ£ô  on track
+                     T: Advance the E-Verify Case Status to View Closed Case Deta
+      IN-9348        [ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûæΓûæΓûæ]  83.7%  (41/49 pts, 8/11 issues)  Γ£ô  on track
+                     T: Detect Duplicate Existing E-Verify Cases and Determine Fl
+      IN-9347        [ΓûêΓûêΓûêΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæ]  12.8%  (5/39 pts, 2/10 issues)  Γ£ô  on track
+                     T: System Settings and Data Migration from I-9 and Legacy fo
+      IN-8722        [ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûæΓûæΓûæΓûæ]  78.0%  (181/232 pts, 51/63 issues)  Γ£ô  on track
+                     T: E-Verify Case View and Pulling I-9 Data to Start Case
+      IN-8077        [ΓûêΓûêΓûêΓûêΓûêΓûêΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæ]  31.2%  (34/109 pts, 8/23 issues)  Γ£ô  on track
+                     D: View and Manage Cases from Dashboard
+
+
+  ΓöÇΓöÇ Learning Management  (20 epic(s)  |  15 on track  4 slipping  1 unestimated)
+
+    ┬╖┬╖ LMS-16201  FY26 H2 Learning Maintenance
+
+      LMS-16934      [ΓûêΓûêΓûêΓûêΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæ]  20.0%  (2/10 pts, 1/5 issues)  Γ£ô  on track
+                     LMS AppShell Decommission Work
+      LMS-16928      [ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûê] 100.0%  (2/2 pts, 2/2 issues)  Γ£ô  on track
+                     Upgrade TAE to .NET 8
+      LMS-16645      [ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûæΓûæΓûæΓûæ]  82.2%  (37/45 pts, 23/27 issues)  Γ£ô  on track
+                     FY26H2 - PDRs Bugs - LMS
+      LMS-16588      [ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæ]  37.8%  (8/22 pts, 3/14 issues)  Γ£ô  on track
+                     FY26Q4 - Quality (Playwright, Qase)
+      LMS-16534      [ΓûêΓûêΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæ]  10.7%  (2/14 pts, 2/14 issues)  ΓÜá  SLIPPING
+                     FY26H2 - Security + AppSec Tickets
+      LMS-16533      [ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæ]  42.9%  (3/7 pts, 3/27 issues)  Γ£ô  on track
+                     FY26H2 - LMS Toggle Cleanup
+      LMS-16532      [ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûæΓûæΓûæ]  82.9%  (48/58 pts, 25/30 issues)  Γ£ô  on track
+                     FY26H2 - Deployments
+      LMS-16529      [ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûê] 100.0%  (4/4 pts, 2/2 issues)  Γ£ô  on track
+                     Upgrade LRNWE to .NET 10
+      LMS-16528      [ΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæ]   0.0%  (0/2 pts, 2/10 issues)  ΓÜá  SLIPPING
+                     FY26H2 Product Team To-Dos
+      LMS-16482      [ΓûêΓûêΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæ]  12.1%  (28/232 pts, 18/145 issues)  ΓÜá  SLIPPING
+                     FY26Q4 - LMS Tech Debt
+      LMS-16480      [ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæ]  55.2%  (39/70 pts, 46/111 issues)  Γ£ô  on track
+                     FY26H2 - Bugs
+
+    ┬╖┬╖ LMS-16502  FY26 H2 Learning Unplanned Work (PDR Enhancements, Unpl
+
+      LMS-16646      [ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûê] 100.0%  (0/0 pts, 1/1 issues)  Γ£ô  on track
+                     FY26H2 - Unplanned Work Due to Outage (e.g. of Another Team 
+      LMS-16527      [ΓûêΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæ]   5.3%  (1/19 pts, 4/43 issues)  ΓÜá  SLIPPING
+                     FY26H2 - Enhancements
+      LMS-16483      [ΓûêΓûêΓûêΓûêΓûêΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæ]  23.4%  (6/26 pts, 7/29 issues)  Γ£ô  on track
+                     FY26H2 - PDR Enhancements - LMS
+
+    ┬╖┬╖ LMS-16579  FY26Q4 Customer as a Co-Creator
+
+      LMS-16580      [ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæ]  37.5%  (15/40 pts, 8/28 issues)  Γ£ô  on track
+                     Authorization Customer as a Co-Creator
+
+    ┬╖┬╖ PCS-1289  Search - Pages | People | Reports
+
+      LMS-15580      [ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûê] 100.0%  (2/2 pts, 1/1 issues)  Γ£ô  on track
+                     FY26 - Migrate LMS fully to Universal Nav
+
+    ┬╖┬╖ PCS-2985  Qase Standards & Guidelines
+
+      LMS-16403      [ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæ]  44.4%  (4/9 pts, 1/3 issues)  Γ£ô  on track
+                     LEARNING: Qase Standards Adoption
+
+    ┬╖┬╖ PCS-3696  AI Ignite ΓÇô Global Header
+
+      LMS-16739      [ΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæ]   0.0%  (0/0 pts, 1/1 issues)  ΓÜá  UNESTIMATED
+                     UHeader Implementation - LMS
+
+    ┬╖┬╖ PCS-3976  LMS Pre-requisites for PDP Eventing
+
+      LMS-16936      [ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæ]  33.3%  (2/6 pts, 1/6 issues)  Γ£ô  on track
+                     Replace QueueItem INSERT from API with RabbitMQ (or EMP)
+
+    ┬╖┬╖ PCS-579  Learning Paths
+
+      LMS-16414      [ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûæΓûæΓûæΓûæΓûæΓûæ]  68.0%  (78/116 pts, 35/56 issues)  Γ£ô  on track
+                     Learning Path - Create Learning Path (demo)
+
+
+    ------------------------------------------------------------------
+    DRAFT ΓÇö paste into a Slack DM with <@U01B71GE77B> and <@UA7Q6TGQ0>
+    ------------------------------------------------------------------
+    Hi <@U01B71GE77B> and <@UA7Q6TGQ0>,
+    
+    Doing my weekly check-in on quarterly commitments for the *Learning Management* team (22% through the quarter).
+    
+    The following commitment(s) are currently behind the expected burn-down rate:
+    
+      ΓÇó LMS-16534: FY26H2 - Security + AppSec Tickets
+      ΓÇó LMS-16528: FY26H2 Product Team To-Dos
+      ΓÇó LMS-16527: FY26H2 - Enhancements
+      ΓÇó LMS-16482: FY26Q4 - LMS Tech Debt
+    
+    The following commitment(s) don't have story point estimates yet. Anything committed for the quarter should be estimated so we can track progress:
+    
+      ΓÇó LMS-16739: UHeader Implementation - LMS
+    
+    A few questions:
+      1. Are you still on track to deliver these by end of quarter?
+      2. Are there any blockers I should know about?
+      3. Is there anything you need help with?
+    
+    Thanks!
+    ------------------------------------------------------------------
+
+  ΓöÇΓöÇ Performance Management  (4 epic(s)  |  2 on track  1 slipping  1 unestimated)
+
+    ┬╖┬╖ PAC-2430  FY26 H2 Performance Management Maintenance
+
+      PAC-2647       [ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæ]  46.9%  (38/81 pts, 14/64 issues)  Γ£ô  on track
+                     PM FY26Q4 Maintenance
+      PAC-2646       [ΓûêΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæ]   4.5%  (3/66 pts, 1/37 issues)  ΓÜá  SLIPPING
+                     PM FY26Q4 Tech Debt
+
+    ┬╖┬╖ PCS-2985  Qase Standards & Guidelines
+
+      PAC-2337       [ΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæ]   0.0%  (0/0 pts, 1/1 issues)  ΓÜá  UNESTIMATED
+                     Performance: Qase level 2
+
+    ┬╖┬╖ PCS-4157  Audit Trail for Performance - Top 5 Events
+
+      PAC-2561       [ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæ]  41.9%  (44/105 pts, 12/58 issues)  Γ£ô  on track
+                     Audit Trail - Top 5 Critical Events
+
+
+    ------------------------------------------------------------------
+    DRAFT ΓÇö paste into a Slack DM with <@U0CR05ZNF> and <@UA7Q6TGQ0>
+    ------------------------------------------------------------------
+    Hi <@U0CR05ZNF> and <@UA7Q6TGQ0>,
+    
+    Doing my weekly check-in on quarterly commitments for the *Performance Management* team (22% through the quarter).
+    
+    The following commitment(s) are currently behind the expected burn-down rate:
+    
+      ΓÇó PAC-2646: PM FY26Q4 Tech Debt
+    
+    The following commitment(s) don't have story point estimates yet. Anything committed for the quarter should be estimated so we can track progress:
+    
+      ΓÇó PAC-2337: Performance: Qase level 2
+    
+    A few questions:
+      1. Are you still on track to deliver these by end of quarter?
+      2. Are there any blockers I should know about?
+      3. Is there anything you need help with?
+    
+    Thanks!
+    ------------------------------------------------------------------
+
+  ΓöÇΓöÇ Compensation Management  (6 epic(s)  |  4 on track  2 slipping  0 unestimated)
+
+    ┬╖┬╖ CMGSD-10225  Compensation Management RTB FY26H2
+
+      CMGSD-10226    [ΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæ]   0.0%  (0/10 pts, 1/14 issues)  ΓÜá  SLIPPING
+                     Compensation Management RTB FY26Q4
+
+    ┬╖┬╖ CMGSD-9060  Engineering Maintenance FY26
+
+      CMGSD-10223    [ΓûêΓûêΓûêΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæ]  16.7%  (1/6 pts, 2/21 issues)  Γ£ô  on track
+                     CM Miscellaneous RTB FY26Q4
+      CMGSD-10162    [ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûæΓûæΓûæΓûæ]  78.4%  (40/51 pts, 13/16 issues)  Γ£ô  on track
+                     Bug Bash FY26 H2
+
+    ┬╖┬╖ CMGSD-9358  Deployment Activities FY26
+
+      CMGSD-8759     [ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûê] 100.0%  (10/10 pts, 7/7 issues)  Γ£ô  on track
+                     Deployment Activities FY26Q1
+
+    ┬╖┬╖ PCS-3109  Market Pay Data Provider Replacement deprecation of Lig
+
+      CMGSD-10161    [ΓûêΓûêΓûêΓûêΓûêΓûêΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæ]  27.8%  (5/18 pts, 3/17 issues)  Γ£ô  on track
+                     Technical Refinement
+      CMGSD-9406     [ΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæ]   0.0%  (0/13 pts, 2/8 issues)  ΓÜá  SLIPPING
+                     [4/29/26] Remove Lightcast data and experiences for contract
+
+
+    ------------------------------------------------------------------
+    DRAFT ΓÇö paste into a Slack DM with <@U1M6YS0LF> and <@UA7Q6TGQ0>
+    ------------------------------------------------------------------
+    Hi <@U1M6YS0LF> and <@UA7Q6TGQ0>,
+    
+    Doing my weekly check-in on quarterly commitments for the *Compensation Management* team (22% through the quarter).
+    
+    The following commitment(s) are currently behind the expected burn-down rate:
+    
+      ΓÇó CMGSD-10226: Compensation Management RTB FY26Q4
+      ΓÇó CMGSD-9406: [4/29/26] Remove Lightcast data and experiences for contractual obligations
+    
+    A few questions:
+      1. Are you still on track to deliver these by end of quarter?
+      2. Are there any blockers I should know about?
+      3. Is there anything you need help with?
+    
+    Thanks!
+    ------------------------------------------------------------------
+
+  ΓöÇΓöÇ Market Pay  (0 epic(s)  |  0 on track  0 slipping  0 unestimated)
+
+
+  ΓöÇΓöÇ Recognition and Rewards  (5 epic(s)  |  5 on track  0 slipping  0 unestimated)
+
+    ┬╖┬╖ PCS-1732  Fund and allocate R&R Wallets for all companies from th
+
+      REC-2263       [ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæ]  50.0%  (31/62 pts, 9/23 issues)  Γ£ô  on track
+                     Pre-Funding Support at Company Set Level
+
+    ┬╖┬╖ PCS-2985  Qase Standards & Guidelines
+
+      REC-3275       [ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûê] 100.0%  (6/6 pts, 2/3 issues)  Γ£ô  on track
+                     R&R : Qase Adoption Level 3
+
+    ┬╖┬╖ PCS-3775  Video Integrator Migrations to V2 Video API & Pipeline
+
+      REC-3421       [ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûê] 100.0%  (3/3 pts, 1/1 issues)  Γ£ô  on track
+                     Video SDK and V1 Endpoints Retirement - REC
+
+    ┬╖┬╖ REC-2656  FY26H2 R&R Tech Initiative
+
+      REC-3452       [ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæ]  38.5%  (5/13 pts, 2/4 issues)  Γ£ô  on track
+                     Allow transactions to be queued so that users don't have to 
+
+    ┬╖┬╖ REC-3184  R&R Customer as Co-Creator Enhancements FY26H2
+
+      REC-3080       [ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûæΓûæΓûæΓûæ]  79.2%  (19/24 pts, 5/9 issues)  Γ£ô  on track
+                     FY26Q4 Customer as Co-Creator Enhancements
+
+
+  ΓöÇΓöÇ Employee Voice  (4 epic(s)  |  4 on track  0 slipping  0 unestimated)
+
+    ┬╖┬╖ EV-2117  Build UForms Library & Builder
+
+      EV-2523        [ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûæΓûæ]  91.9%  (34/37 pts, 9/10 issues)  Γ£ô  on track
+                     UForms Library - TalentForms Replacement - FY26Q4
+
+    ┬╖┬╖ PCS-3100  .NET 10 Upgrades
+
+      EV-2421        [ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûê] 100.0%  (1/1 pts, 1/1 issues)  Γ£ô  on track
+                     .NET 10 Upgrades from .NET 6/7 or below
+
+    ┬╖┬╖ PCS-3791  Drive Engagement Survey launch rates using timely nudge
+
+      EV-2331        [ΓûêΓûêΓûêΓûêΓûêΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæΓûæ]  24.1%  (7/29 pts, 2/12 issues)  Γ£ô  on track
+                     Add Recurring Launch Reminders to EV Admins
+
+    ┬╖┬╖ PCS-4108  EV EMP Event Publishing to Audit Log
+
+      EV-2469        [ΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûêΓûê] 100.0%  (8/8 pts, 1/1 issues)  Γ£ô  on track
+                     Update EmployeeVoice WorkEngine to WEv6
+
+
+======================================================================
+  ACTION NEEDED: 4 team(s) require outreach:
+    ΓÇó Recruiting (1 slipping)
+    ΓÇó Learning Management (4 slipping, 1 unestimated)
+    ΓÇó Performance Management (1 slipping, 1 unestimated)
+    ΓÇó Compensation Management (2 slipping)
+======================================================================
+
+Markdown report written to: C:\Code\Paylocity\quarterly-commitments\report-2026-04-21.md
+Per-team reports written to: reports/2026-04-21/ (8 files)
+Slack drafts written to: C:\Code\Paylocity\quarterly-commitments\slack-drafts-2026-04-21.md
