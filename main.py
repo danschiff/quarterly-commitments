@@ -164,9 +164,9 @@ def load_raw_data(path):
 def build_summaries_from_raw(raw_data, config, quarter_pct):
     """Compute progress and slippage from cached raw data.
 
-    Filters out epics where no work has been completed yet
-    (done_issues == 0) — these haven't started and aren't relevant.
     Epics that are 100% complete are kept to celebrate progress.
+    Epics with no completed work yet are included so committed-but-not-started
+    work remains visible in the report.
 
     Returns the same list-of-team-dicts structure that print_report()
     and write_markdown_report() expect.
@@ -185,13 +185,15 @@ def build_summaries_from_raw(raw_data, config, quarter_pct):
         for epic_data in team_data["epics"]:
             prog = epic_progress(epic_data["children"])
 
-            # Skip epics where no work has been completed yet
-            if prog["done_issues"] == 0:
-                continue
-
             slipping = (
                 not prog["unestimated"]
+                and prog["done_issues"] > 0
                 and is_slipping(prog["pct_complete"], quarter_pct, threshold)
+            )
+            not_started = (
+                not prog["unestimated"]
+                and prog["done_issues"] == 0
+                and prog["total_issues"] > 0
             )
 
             ikey = epic_data.get("initiative_key")
@@ -210,6 +212,7 @@ def build_summaries_from_raw(raw_data, config, quarter_pct):
                 "initiative_health":     init_data.get("health"),
                 "progress":              prog,
                 "slipping":              slipping,
+                "not_started":           not_started,
             })
 
         team_cfg = cfg_by_name.get(team_data["name"])
@@ -228,7 +231,7 @@ def build_summaries_from_raw(raw_data, config, quarter_pct):
             "epics":        enriched,
             "any_slipping": any(e["slipping"] for e in enriched),
             "any_needs_attention": any(
-                e["slipping"] or e["progress"]["unestimated"]
+                e["slipping"] or e["not_started"] or e["progress"]["unestimated"]
                 for e in enriched
             ),
         })

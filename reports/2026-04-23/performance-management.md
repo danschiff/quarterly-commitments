@@ -5,7 +5,7 @@
 
 ---
 
-5 epic(s) &nbsp;·&nbsp; 3 on track &nbsp;·&nbsp; 1 slipping &nbsp;·&nbsp; 1 unestimated
+8 epic(s) &nbsp;·&nbsp; 4 on track &nbsp;·&nbsp; 1 slipping &nbsp;·&nbsp; 3 unestimated
 
 ## [PAC-2430](https://paylocity.atlassian.net/browse/PAC-2430) — FY26 H2 Performance Management Maintenance &nbsp;·&nbsp; 🎯 Committed this quarter &nbsp;·&nbsp; Health (from Jira): 🟢 On Track
 
@@ -30,5 +30,13 @@
 
 | Epic | Summary | Health | Progress | Status |
 |------|---------|--------|----------|--------|
+| [PAC-2339](https://paylocity.atlassian.net/browse/PAC-2339) | Performance: Qase level 4 | — | [░░░░░░░░░░░░░░░░░░░░] 0.0% (0/0 pts, 0/0 issues) | ⚠ UNESTIMATED |
+| [PAC-2338](https://paylocity.atlassian.net/browse/PAC-2338) | Performance: Qase level 3 | — | [░░░░░░░░░░░░░░░░░░░░] 0.0% (0/0 pts, 0/1 issues) | ⚠ UNESTIMATED |
 | [PAC-2337](https://paylocity.atlassian.net/browse/PAC-2337) | Performance: Qase level 2 | — | [░░░░░░░░░░░░░░░░░░░░] 0.0% (0/0 pts, 1/1 issues) | ⚠ UNESTIMATED |
+
+## [PCS-3775](https://paylocity.atlassian.net/browse/PCS-3775) — Video Integrator Migrations to V2 Video API & Pipeline &nbsp;·&nbsp; Health (from Jira): 🟢 On Track
+
+| Epic | Summary | Health | Progress | Status |
+|------|---------|--------|----------|--------|
+| [PAC-2509](https://paylocity.atlassian.net/browse/PAC-2509) | Video SDK and V1 Endpoints Retirement - PAC | — | [░░░░░░░░░░░░░░░░░░░░] 0.0% (0/8 pts, 0/2 issues) | 🔴 NOT STARTED |
 

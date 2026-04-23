@@ -5,16 +5,19 @@
 
 ---
 
-20 epic(s) &nbsp;·&nbsp; 15 on track &nbsp;·&nbsp; 4 slipping &nbsp;·&nbsp; 1 unestimated
+31 epic(s) &nbsp;·&nbsp; 20 on track &nbsp;·&nbsp; 4 slipping &nbsp;·&nbsp; 7 unestimated
 
 ## [LMS-16201](https://paylocity.atlassian.net/browse/LMS-16201) — FY26 H2 Learning Maintenance &nbsp;·&nbsp; 🎯 Committed this quarter &nbsp;·&nbsp; Health (from Jira): 🟢 On Track
 
 | Epic | Summary | Health | Progress | Status |
 |------|---------|--------|----------|--------|
+| [LMS-16943](https://paylocity.atlassian.net/browse/LMS-16943) | LMS - Decom Video SDK - Upgrade from V1 Video API to V2 | — | [░░░░░░░░░░░░░░░░░░░░] 0.0% (0/2 pts, 0/2 issues) | 🔴 NOT STARTED |
 | [LMS-16934](https://paylocity.atlassian.net/browse/LMS-16934) | LMS AppShell Decommission Work | — | [████░░░░░░░░░░░░░░░░] 20.0% (2/10 pts, 1/5 issues) | ✓ on track |
 | [LMS-16928](https://paylocity.atlassian.net/browse/LMS-16928) | Upgrade TAE to .NET 8 | — | [████████████████████] 100.0% (2/2 pts, 2/2 issues) | ✓ on track |
+| [LMS-16927](https://paylocity.atlassian.net/browse/LMS-16927) | Upgrade Learning Management API to .NET 10 | — | [░░░░░░░░░░░░░░░░░░░░] 0.0% (0/0 pts, 0/0 issues) | ⚠ UNESTIMATED |
 | [LMS-16645](https://paylocity.atlassian.net/browse/LMS-16645) | FY26H2 - PDRs Bugs - LMS | — | [████████████████░░░░] 82.2% (37/45 pts, 23/28 issues) | ✓ on track |
 | [LMS-16588](https://paylocity.atlassian.net/browse/LMS-16588) | FY26Q4 - Quality (Playwright, Qase) | — | [██████████░░░░░░░░░░] 47.5% (14/30 pts, 6/16 issues) | ✓ on track |
+| [LMS-16535](https://paylocity.atlassian.net/browse/LMS-16535) | FY26H2 - Performance and Scale | — | [░░░░░░░░░░░░░░░░░░░░] 0.0% (0/12 pts, 0/8 issues) | 🔴 NOT STARTED |
 | [LMS-16534](https://paylocity.atlassian.net/browse/LMS-16534) | FY26H2 - Security + AppSec Tickets | — | [██░░░░░░░░░░░░░░░░░░] 10.7% (2/14 pts, 2/14 issues) | ⚠ SLIPPING |
 | [LMS-16533](https://paylocity.atlassian.net/browse/LMS-16533) | FY26H2 - LMS Toggle Cleanup | — | [█████████░░░░░░░░░░░] 42.9% (3/7 pts, 3/27 issues) | ✓ on track |
 | [LMS-16532](https://paylocity.atlassian.net/browse/LMS-16532) | FY26H2 - Deployments | — | [█████████████████░░░] 86.3% (50/58 pts, 26/30 issues) | ✓ on track |
@@ -22,6 +25,8 @@
 | [LMS-16528](https://paylocity.atlassian.net/browse/LMS-16528) | FY26H2 Product Team To-Dos | — | [░░░░░░░░░░░░░░░░░░░░] 0.0% (0/2 pts, 2/10 issues) | ⚠ SLIPPING |
 | [LMS-16482](https://paylocity.atlassian.net/browse/LMS-16482) | FY26Q4 - LMS Tech Debt | — | [███░░░░░░░░░░░░░░░░░] 14.6% (34/234 pts, 21/146 issues) | ✓ on track |
 | [LMS-16480](https://paylocity.atlassian.net/browse/LMS-16480) | FY26H2 - Bugs | — | [███████████░░░░░░░░░] 56.0% (40/70 pts, 48/111 issues) | ✓ on track |
+| [LMS-16391](https://paylocity.atlassian.net/browse/LMS-16391) | FY26H2 - Resolve Intermittent Completion Issues | — | [░░░░░░░░░░░░░░░░░░░░] 0.0% (0/2 pts, 0/1 issues) | 🔴 NOT STARTED |
+| [LMS-16156](https://paylocity.atlassian.net/browse/LMS-16156) | Long-Lived Toggles | — | [░░░░░░░░░░░░░░░░░░░░] 0.0% (0/0 pts, 0/1 issues) | ⚠ UNESTIMATED |
 
 ## [LMS-16502](https://paylocity.atlassian.net/browse/LMS-16502) — FY26 H2 Learning Unplanned Work (PDR Enhancements, Unplanned Work) &nbsp;·&nbsp; 🎯 Committed this quarter &nbsp;·&nbsp; Health (from Jira): 🟢 On Track
 
@@ -36,6 +41,7 @@
 | Epic | Summary | Health | Progress | Status |
 |------|---------|--------|----------|--------|
 | [LMS-16580](https://paylocity.atlassian.net/browse/LMS-16580) | Authorization Customer as a Co-Creator | 🟢 On Track | [███████░░░░░░░░░░░░░] 35.7% (15/42 pts, 8/31 issues) | ✓ on track |
+| [LMS-15573](https://paylocity.atlassian.net/browse/LMS-15573) | FY26 - Granular Permissions - Update UNav to use new permissions instead of using LMS API calls | 🟢 On Track | [░░░░░░░░░░░░░░░░░░░░] 0.0% (0/2 pts, 0/1 issues) | 🔴 NOT STARTED |
 
 ## [PCS-1289](https://paylocity.atlassian.net/browse/PCS-1289) — Search - Pages | People | Reports &nbsp;·&nbsp; Health (from Jira): 🟢 On Track
 
@@ -49,17 +55,32 @@
 |------|---------|--------|----------|--------|
 | [LMS-16403](https://paylocity.atlassian.net/browse/LMS-16403) | LEARNING: Qase Standards Adoption | 🟢 On Track | [█████████░░░░░░░░░░░] 44.4% (4/9 pts, 1/3 issues) | ✓ on track |
 
+## [PCS-3100](https://paylocity.atlassian.net/browse/PCS-3100) — .NET 10 Upgrades &nbsp;·&nbsp; Health (from Jira): 🟢 On Track
+
+| Epic | Summary | Health | Progress | Status |
+|------|---------|--------|----------|--------|
+| [LMS-16659](https://paylocity.atlassian.net/browse/LMS-16659) | .NET 10 Upgrades from .NET 6/7 or below | — | [░░░░░░░░░░░░░░░░░░░░] 0.0% (0/0 pts, 0/0 issues) | ⚠ UNESTIMATED |
+| [LMS-16658](https://paylocity.atlassian.net/browse/LMS-16658) | .NET 10 Upgrades from .NET 8 or 9 | — | [░░░░░░░░░░░░░░░░░░░░] 0.0% (0/0 pts, 0/0 issues) | ⚠ UNESTIMATED |
+
 ## [PCS-3696](https://paylocity.atlassian.net/browse/PCS-3696) — AI Ignite – Global Header &nbsp;·&nbsp; Health (from Jira): 🟢 On Track
 
 | Epic | Summary | Health | Progress | Status |
 |------|---------|--------|----------|--------|
 | [LMS-16739](https://paylocity.atlassian.net/browse/LMS-16739) | UHeader Implementation - LMS | — | [░░░░░░░░░░░░░░░░░░░░] 0.0% (0/0 pts, 1/1 issues) | ⚠ UNESTIMATED |
 
+## [PCS-3775](https://paylocity.atlassian.net/browse/PCS-3775) — Video Integrator Migrations to V2 Video API & Pipeline &nbsp;·&nbsp; Health (from Jira): 🟢 On Track
+
+| Epic | Summary | Health | Progress | Status |
+|------|---------|--------|----------|--------|
+| [LMS-16854](https://paylocity.atlassian.net/browse/LMS-16854) | Video SDK and V1 Endpoints Retirement - LMS | — | [░░░░░░░░░░░░░░░░░░░░] 0.0% (0/0 pts, 0/0 issues) | ⚠ UNESTIMATED |
+
 ## [PCS-3976](https://paylocity.atlassian.net/browse/PCS-3976) — LMS Pre-requisites for PDP Eventing
 
 | Epic | Summary | Health | Progress | Status |
 |------|---------|--------|----------|--------|
+| [LMS-16937](https://paylocity.atlassian.net/browse/LMS-16937) | Upgrade Learning WorkEngine (LRNWE) to WorkEngine 6 | — | [░░░░░░░░░░░░░░░░░░░░] 0.0% (0/0 pts, 0/2 issues) | ⚠ UNESTIMATED |
 | [LMS-16936](https://paylocity.atlassian.net/browse/LMS-16936) | Replace QueueItem INSERT from API with RabbitMQ (or EMP) | — | [███████░░░░░░░░░░░░░] 33.3% (2/6 pts, 1/6 issues) | ✓ on track |
+| [LMS-16935](https://paylocity.atlassian.net/browse/LMS-16935) | Update LMS Training recommendations to consume from Recommendation Platform API | — | [░░░░░░░░░░░░░░░░░░░░] 0.0% (0/4 pts, 0/2 issues) | 🔴 NOT STARTED |
 
 ## [PCS-579](https://paylocity.atlassian.net/browse/PCS-579) — Learning Paths &nbsp;·&nbsp; Health (from Jira): 🟢 On Track
 

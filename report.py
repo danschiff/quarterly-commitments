@@ -157,6 +157,8 @@ def _render_team_lines(team, quarter_pct, config, *, initiative_hlevel=3, includ
 
                 if prog["unestimated"]:
                     status = "⚠ UNESTIMATED"
+                elif epic.get("not_started"):
+                    status = "🔴 NOT STARTED"
                 elif epic["slipping"]:
                     status = "⚠ SLIPPING"
                 else:
@@ -167,7 +169,7 @@ def _render_team_lines(team, quarter_pct, config, *, initiative_hlevel=3, includ
             w()
 
     if include_draft and team["any_needs_attention"]:
-        slipping_epics    = [e for e in epics if e["slipping"]]
+        slipping_epics    = [e for e in epics if e["slipping"] or e.get("not_started")]
         unestimated_epics = [e for e in epics if e["progress"]["unestimated"]]
         msg = draft_message(
             team_name         = team["name"],
@@ -254,6 +256,8 @@ def print_report(team_summaries, quarter_pct, config):
 
                 if prog["unestimated"]:
                     tag = "  ⚠  UNESTIMATED"
+                elif epic.get("not_started"):
+                    tag = "  🔴  NOT STARTED"
                 elif epic["slipping"]:
                     tag = "  ⚠  SLIPPING"
                 else:
@@ -271,7 +275,7 @@ def print_report(team_summaries, quarter_pct, config):
 
         # ── draft message ─────────────────────────────────────────────
         if team["any_needs_attention"]:
-            slipping_epics    = [e for e in epics if e["slipping"]]
+            slipping_epics    = [e for e in epics if e["slipping"] or e.get("not_started")]
             unestimated_epics = [e for e in epics if e["progress"]["unestimated"]]
             msg = draft_message(
                 team_name         = team["name"],
@@ -420,7 +424,7 @@ def write_slack_drafts(team_summaries, quarter_pct, config, path=None):
         w()
         w("---")
         for team in attention_teams:
-            slipping_epics    = [e for e in team["epics"] if e["slipping"]]
+            slipping_epics    = [e for e in team["epics"] if e["slipping"] or e.get("not_started")]
             unestimated_epics = [e for e in team["epics"] if e["progress"]["unestimated"]]
             msg = draft_message(
                 team_name         = team["name"],
