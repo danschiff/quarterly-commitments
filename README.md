@@ -14,8 +14,10 @@ For each configured team it:
    - **Unestimated** — the epic has no story-point estimates at all.
    - **Slipping** — the epic is more than `slippage_threshold` (default 10 pp) behind the linear target.
    - **On track** — everything else, including 100% complete.
-4. Filters out epics where no child work has started yet (noise).
-5. Renders four artifacts so you can skim quickly and act:
+4. Surfaces the **Health** status from Jira (`customfield_10883`) for each epic and its parent initiative so you can see at a glance whether the team considers it healthy, at risk, or off track.
+5. Filters out epics where no child work has started yet (noise).
+6. Within each team, **initiatives committed to the current quarter** (via `customfield_11245`) are sorted to the top and marked with a 🎯 badge so they're immediately visible.
+7. Renders four artifacts so you can skim quickly and act:
    - Console report
    - Combined Markdown report: `report-YYYY-MM-DD.md`
    - One Markdown file per team in `reports/YYYY-MM-DD/`
@@ -66,8 +68,9 @@ pip install -r requirements.txt
 Edit `config.yaml`:
 
 - `jira.base_url` / `jira.email` — your Jira Cloud instance and account.
-- `jira.current_quarter` — the exact dropdown value used for the "Committed Quarter" custom field (e.g. `"FY26 Quarter 4"`).
+- `jira.current_quarter` — the exact dropdown value used for the "Committed Quarter" custom field (e.g. `"FY26 Quarter 4"`). This value is also used to determine which initiatives are committed this quarter (see step 6 in *What it does*).
 - `jira.committed_quarter_field` / `jira.team_field` / `jira.story_points_field` — custom field IDs for your Jira instance.
+- `jira.health_field` — custom field ID for the Health status field (e.g. `customfield_10883`). When set, a Health column appears in every epic table and an inline health tag is shown on initiative headings.
 - `quarter.start` / `quarter.end` — ISO dates bounding the current quarter.
 - `slippage_threshold` — fraction behind linear target before an epic is flagged (0.10 = 10 pp).
 - `teams` — one entry per team. Each team needs:
@@ -122,6 +125,16 @@ python -m pytest tests/ -q
 - **`reports/YYYY-MM-DD/<team>.md`** — per-team Markdown for sharing individually.
 - **`slack-drafts-YYYY-MM-DD.md`** — only the draft messages, grouped by team, each in a fenced code block ready to copy.
 - **`data-YYYY-MM-DD.json`** — raw Jira cache (safe to delete; will be re-fetched).
+
+**Status markers used in reports:**
+
+| Marker | Meaning |
+|--------|---------|
+| 🎯 Committed this quarter · | Initiative is committed to the current quarter (sorted to the top within each team). |
+| ✅ On Track / ⚠️ At Risk / 🛑 Off Track | Initiative or epic Health status from Jira (`health_field`). Shown inline on initiative headings and in the Health column of the epic table. |
+| ⚠ SLIPPING | Epic is behind the linear burn-down target by more than `slippage_threshold`. |
+| ⚠ UNESTIMATED | Epic has no story-point estimates; can't compute progress. |
+| ✓ on track | Epic is at or ahead of target. |
 
 ## Keeping this README current
 

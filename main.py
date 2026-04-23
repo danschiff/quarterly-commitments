@@ -117,6 +117,7 @@ def fetch_raw_data(config):
                 "summary":           epic["summary"],
                 "initiative_key":    epic.get("initiative_key"),
                 "initiative_summary": epic.get("initiative_summary"),
+                "health":            epic.get("health"),
                 "children":          children,
             })
 
@@ -127,9 +128,20 @@ def fetch_raw_data(config):
             "epics":            enriched_epics,
         })
 
+    # Collect all unique initiative keys and bulk-fetch their metadata
+    initiative_keys = {
+        epic["initiative_key"]
+        for team in teams
+        for epic in team["epics"]
+        if epic.get("initiative_key")
+    }
+    print(f"  Fetching metadata for {len(initiative_keys)} initiative(s)...", flush=True)
+    initiatives = jc.fetch_initiatives(config, initiative_keys)
+
     return {
         "fetched_at": datetime.now().isoformat(timespec="seconds"),
         "teams": teams,
+        "initiatives": initiatives,
     }
 
 
@@ -160,6 +172,8 @@ def build_summaries_from_raw(raw_data, config, quarter_pct):
     and write_markdown_report() expect.
     """
     threshold = config["slippage_threshold"]
+    current_quarter = config["jira"]["current_quarter"]
+    initiatives = raw_data.get("initiatives", {})
     # Manager info is config-only (not Jira data), so always read it from
     # the current config rather than the (possibly stale) cache. Fall back
     # to the cache's fields only if the team is missing from config.
@@ -179,13 +193,23 @@ def build_summaries_from_raw(raw_data, config, quarter_pct):
                 not prog["unestimated"]
                 and is_slipping(prog["pct_complete"], quarter_pct, threshold)
             )
+
+            ikey = epic_data.get("initiative_key")
+            init_data = initiatives.get(ikey, {}) if ikey else {}
+            committed_this_quarter = (
+                init_data.get("committed_quarter") == current_quarter
+            )
+
             enriched.append({
-                "key":               epic_data["key"],
-                "summary":           epic_data["summary"],
-                "initiative_key":    epic_data.get("initiative_key"),
-                "initiative_summary": epic_data.get("initiative_summary"),
-                "progress":          prog,
-                "slipping":          slipping,
+                "key":                   epic_data["key"],
+                "summary":               epic_data["summary"],
+                "initiative_key":        ikey,
+                "initiative_summary":    epic_data.get("initiative_summary"),
+                "committed_this_quarter": committed_this_quarter,
+                "health":                epic_data.get("health"),
+                "initiative_health":     init_data.get("health"),
+                "progress":              prog,
+                "slipping":              slipping,
             })
 
         team_cfg = cfg_by_name.get(team_data["name"])

@@ -19,6 +19,10 @@ jira:
   # Custom field key for story points (default is customfield_10016 in most Jira configs)
   story_points_field: "customfield_10034"
 
+  # Custom field key for the Health status field (On Track / At Risk / Off Track).
+  # Remove or leave blank to hide the Health column from reports.
+  health_field: "customfield_10883"
+
   # The exact dropdown value used in Jira to mark an Epic as committed this quarter
   current_quarter: "FY26 Quarter 4"
 
@@ -75,17 +79,17 @@ teams:
     sem_slack_id: "U0ADRG6EZ37"
 
   - name: "Learning Management"
-    team_field_value: "Learning"
+    team_field_value: "Learning Management System"
     em_slack_id: "U01B71GE77B"
     sem_slack_id: "UA7Q6TGQ0"
 
   - name: "Performance Management"
-    team_field_value: "Performance"
+    team_field_value: "Performance Management"
     em_slack_id: "U0CR05ZNF"
     sem_slack_id: "UA7Q6TGQ0"
 
   - name: "Compensation Management"
-    team_field_value: "Compensation"
+    team_field_value: "Compensation Management"
     em_slack_id: "U1M6YS0LF"
     sem_slack_id: "UA7Q6TGQ0"
 

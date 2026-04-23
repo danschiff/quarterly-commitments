@@ -30,14 +30,30 @@ def _progress_bar(pct, width=BAR_WIDTH):
     return "[" + "\u2588" * filled + "\u2591" * (width - filled) + "]"
 
 
+_HEALTH_EMOJI = {
+    "on track":  "✅",
+    "at risk":   "⚠️",
+    "off track":  "🛑",
+}
+
+
+def _health_tag(health_value):
+    """Return a short display string for a Jira Health field value, or empty string."""
+    if not health_value:
+        return ""
+    emoji = _HEALTH_EMOJI.get(health_value.lower(), "")
+    return f"{emoji} {health_value}" if emoji else health_value
+
+
 def _group_by_initiative(epics):
     """Return epics grouped by initiative, preserving encounter order.
 
-    Returns a list of (initiative_key, initiative_summary, [epics]) tuples.
-    Epics with no parent initiative are grouped last under (None, None, ...).
+    Returns a list of (initiative_key, initiative_summary, [epics], committed_this_quarter)
+    tuples.  Committed-this-quarter initiatives sort first, then alphabetically
+    by key, then None (no parent) last.
     """
     order = []        # preserves first-seen order of initiative keys
-    groups = {}       # initiative_key -> {"summary": str, "epics": list}
+    groups = {}       # initiative_key -> {"summary": str, "epics": list, "committed": bool}
 
     for epic in epics:
         ikey = epic.get("initiative_key")
@@ -46,18 +62,21 @@ def _group_by_initiative(epics):
             groups[ikey] = {
                 "summary": epic.get("initiative_summary"),
                 "epics": [],
+                "committed": False,
             }
         groups[ikey]["epics"].append(epic)
+        if epic.get("committed_this_quarter"):
+            groups[ikey]["committed"] = True
 
-    # Sort: named initiatives first (alphabetically by key), None last
+    # Sort: committed initiatives first, then alphabetical by key, None last
     named = sorted(
         (k for k in order if k is not None),
-        key=lambda k: k or ""
+        key=lambda k: (not groups[k]["committed"], k or "")
     )
     order_sorted = named + ([None] if None in groups else [])
 
     return [
-        (k, groups[k]["summary"], groups[k]["epics"])
+        (k, groups[k]["summary"], groups[k]["epics"], groups[k]["committed"])
         for k in order_sorted
     ]
 
@@ -106,15 +125,26 @@ def _render_team_lines(team, quarter_pct, config, *, initiative_hlevel=3, includ
     w()
 
     if epics:
-        for ikey, isummary, iepics in _group_by_initiative(epics):
+        for ikey, isummary, iepics, committed in _group_by_initiative(epics):
             if ikey:
                 ilink = f"[{ikey}]({base_url}/browse/{ikey})"
-                w(f"{initiative_prefix} {ilink} — {isummary}")
+                # Initiative health — derive from the first epic that carries it
+                init_health = next(
+                    (e.get("initiative_health") for e in iepics if e.get("initiative_health")),
+                    None,
+                )
+                committed_suffix = " &nbsp;·&nbsp; 🎯 Committed this quarter" if committed else ""
+                health_suffix = (
+                    f" &nbsp;·&nbsp; Health (from Jira): {_health_tag(init_health)}"
+                    if init_health
+                    else (" &nbsp;·&nbsp; 🛑 Missing Jira Health Value" if committed else "")
+                )
+                w(f"{initiative_prefix} {ilink} — {isummary}{committed_suffix}{health_suffix}")
             else:
                 w(f"{initiative_prefix} (no parent initiative)")
             w()
-            w("| Epic | Summary | Progress | Status |")
-            w("|------|---------|----------|--------|")            
+            w("| Epic | Summary | Health | Progress | Status |")
+            w("|------|---------|--------|----------|--------|")
             for epic in iepics:
                 prog   = epic["progress"]
                 link   = f"[{epic['key']}]({base_url}/browse/{epic['key']})"
@@ -123,6 +153,7 @@ def _render_team_lines(team, quarter_pct, config, *, initiative_hlevel=3, includ
                 pts    = f"{prog['done_pts']:.0f}/{prog['total_pts']:.0f} pts"
                 iss    = f"{prog['done_issues']}/{prog['total_issues']} issues"
                 detail = f"{bar} {pct} ({pts}, {iss})"
+                health = _health_tag(epic.get("health")) or "—"
 
                 if prog["unestimated"]:
                     status = "⚠ UNESTIMATED"
@@ -132,7 +163,7 @@ def _render_team_lines(team, quarter_pct, config, *, initiative_hlevel=3, includ
                     status = "✓ on track"
 
                 summary = epic["summary"].replace("|", "\\|")
-                w(f"| {link} | {summary} | {detail} | {status} |")
+                w(f"| {link} | {summary} | {health} | {detail} | {status} |")
             w()
 
     if include_draft and team["any_needs_attention"]:
@@ -200,9 +231,19 @@ def print_report(team_summaries, quarter_pct, config):
               f"{n_unestimated} unestimated)")
         print()
 
-        for ikey, isummary, iepics in _group_by_initiative(epics):
+        for ikey, isummary, iepics, committed in _group_by_initiative(epics):
+            init_health = next(
+                (e.get("initiative_health") for e in iepics if e.get("initiative_health")),
+                None,
+            )
+            committed_tag = "  [🎯 Committed this quarter]" if committed else ""
+            health_suffix = (
+                f"  [{_health_tag(init_health)}]"
+                if init_health
+                else ("  [🛑 Missing Jira Health Value]" if committed else "")
+            )
             label = (
-                f"{ikey}  {isummary[:55]}" if ikey
+                f"{ikey}  {isummary[:48]}{committed_tag}{health_suffix}" if ikey
                 else "(no parent initiative)"
             )
             print(f"    ·· {label}")
@@ -218,12 +259,13 @@ def print_report(team_summaries, quarter_pct, config):
                 else:
                     tag = "  ✓  on track"
 
+                health_col = f"  [{_health_tag(epic.get('health'))}]" if epic.get("health") else ""
                 bar  = _progress_bar(prog["pct_complete"])
                 pct  = prog["pct_complete"] * 100
                 pts  = f"{prog['done_pts']:.0f}/{prog['total_pts']:.0f} pts"
                 iss  = f"{prog['done_issues']}/{prog['total_issues']} issues"
 
-                print(f"      {epic['key']:14s} {bar} {pct:5.1f}%  ({pts}, {iss}){tag}")
+                print(f"      {epic['key']:14s} {bar} {pct:5.1f}%  ({pts}, {iss}){tag}{health_col}")
                 print(f"      {'':14s} {epic['summary'][:60]}")
             print()
 

@@ -132,11 +132,15 @@ def fetch_committed_epics(config):
     team_field = jira_cfg["team_field"]                     # cf[10817]
     team_cf_key = _cf_to_customfield(team_field)            # customfield_10817
 
+    health_cf_key = _cf_to_customfield(jira_cfg.get("health_field", ""))  # customfield_10883
+
     jql = (
         f'issuetype = Epic AND {committed_field} = "{quarter}"'
         f' ORDER BY {team_field} ASC'
     )
     fields = ["summary", team_cf_key, "parent"]
+    if health_cf_key:
+        fields.append(health_cf_key)
 
     raw_issues = _search_jql(config, jql, fields)
 
@@ -144,6 +148,8 @@ def fetch_committed_epics(config):
     for issue in raw_issues:
         f = issue.get("fields", {})
         parent = f.get("parent") or {}
+        health_raw = f.get(health_cf_key) if health_cf_key else None
+        health = health_raw.get("value") if isinstance(health_raw, dict) else health_raw
         results.append({
             "key": issue["key"],
             "summary": f.get("summary", ""),
@@ -152,6 +158,7 @@ def fetch_committed_epics(config):
             "initiative_summary": (
                 parent.get("fields", {}).get("summary") or parent.get("key")
             ),
+            "health": health,
         })
     return results
 
@@ -204,3 +211,50 @@ def fetch_epic_children(config, epic_key):
         })
 
     return children
+
+
+def fetch_initiatives(config, keys):
+    """Fetch initiative metadata for the given collection of issue keys.
+
+    keys: iterable of str issue keys (e.g. {"PROJ-1", "PROJ-2"})
+
+    Returns a dict mapping key -> {
+        "committed_quarter": str | None   (value of customfield_11245)
+    }
+    """
+    if not keys:
+        return {}
+
+    jira_cfg = config["jira"]
+    committed_cf_key = _cf_to_customfield(jira_cfg["committed_quarter_field"])  # customfield_11245
+    health_cf_key = _cf_to_customfield(jira_cfg.get("health_field", ""))        # customfield_10883
+
+    fetch_fields = [committed_cf_key]
+    if health_cf_key:
+        fetch_fields.append(health_cf_key)
+
+    keys_sorted = sorted(keys)
+    result = {}
+
+    # Chunk to avoid JQL length limits
+    chunk_size = 50
+    for i in range(0, len(keys_sorted), chunk_size):
+        chunk = keys_sorted[i:i + chunk_size]
+        keys_jql = ", ".join(chunk)
+        jql = f"key in ({keys_jql})"
+        raw_issues = _search_jql(config, jql, fetch_fields)
+
+        for issue in raw_issues:
+            f = issue.get("fields", {})
+            cf_raw = f.get(committed_cf_key)
+            committed_quarter = (
+                cf_raw.get("value") if isinstance(cf_raw, dict) else cf_raw
+            )
+            health_raw = f.get(health_cf_key) if health_cf_key else None
+            health = health_raw.get("value") if isinstance(health_raw, dict) else health_raw
+            result[issue["key"]] = {
+                "committed_quarter": committed_quarter,
+                "health": health,
+            }
+
+    return result

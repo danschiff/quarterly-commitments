@@ -232,6 +232,7 @@ class TestFetchCommittedEpics(unittest.TestCase):
             "team_field_value": "Recruiting",
             "initiative_key": None,
             "initiative_summary": None,
+            "health": None,
         })
         self.assertEqual(result[1]["team_field_value"], "Onboarding")
 

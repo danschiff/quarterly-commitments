@@ -1,0 +1,213 @@
+{
+  "main": {
+    "id": "9d0b0b2c429e174e",
+    "type": "split",
+    "children": [
+      {
+        "id": "270493249680cd79",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "896718912031412a",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "enhancements/2026-4-23.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "2026-4-23"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "5b9d2c25deb89f0b",
+    "type": "split",
+    "children": [
+      {
+        "id": "c4641464d3d45883",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "8c1c553e6f897043",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "6801cdc7187d49e0",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "7b08ae0fa5afcb4d",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "9cee1ece83660927",
+    "type": "split",
+    "children": [
+      {
+        "id": "ee6e221b012b01a3",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "2628350fbfb84292",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "enhancements/2026-4-23.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for 2026-4-23"
+            }
+          },
+          {
+            "id": "50988160a2667923",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "enhancements/2026-4-23.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from 2026-4-23"
+            }
+          },
+          {
+            "id": "862364e27d2c0bb7",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "9de5c098b8d0f79d",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "0d46997e09ec15f7",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "enhancements/2026-4-23.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of 2026-4-23"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "896718912031412a",
+  "lastOpenFiles": [
+    "__pycache__/report.cpython-311.pyc.1667321465648",
+    "__pycache__/report.cpython-311.pyc.1404255767344",
+    "__pycache__/report.cpython-311.pyc.2222903364400",
+    "__pycache__/report.cpython-311.pyc.2466971650992",
+    "__pycache__/jira_client.cpython-311.pyc.2466934652720",
+    "__pycache__/report.cpython-311.pyc.2193511795504",
+    "__pycache__/report.cpython-311.pyc.2937796545328",
+    "tests/__pycache__/test_jira_client.cpython-311-pytest-9.0.3.pyc.39760",
+    "__pycache__/jira_client.cpython-311.pyc.2655313497264",
+    "slack-drafts-2026-04-23.md",
+    "reports/2026-04-23/recruiting.md",
+    "reports/2026-04-23/recognition-and-rewards.md",
+    "reports/2026-04-23/performance-management.md",
+    "reports/2026-04-23/onboarding.md",
+    "reports/2026-04-23/market-pay.md",
+    "reports/2026-04-23/learning-management.md",
+    "reports/2026-04-23/employee-voice.md",
+    "reports/2026-04-23/compensation-management.md",
+    "reports/2026-04-23",
+    "report-2026-04-23.md",
+    "data-2026-04-23.json",
+    "README.md",
+    "Untitled.md",
+    "enhancements/2026-4-23.md"
+  ]
+}
