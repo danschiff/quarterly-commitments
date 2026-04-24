@@ -169,8 +169,9 @@ def _render_team_lines(team, quarter_pct, config, *, initiative_hlevel=3, includ
             w()
 
     if include_draft and team["any_needs_attention"]:
-        slipping_epics    = [e for e in epics if e["slipping"] or e.get("not_started")]
+        slipping_epics    = [e for e in epics if e["slipping"]]
         unestimated_epics = [e for e in epics if e["progress"]["unestimated"]]
+        not_started_epics = [e for e in epics if e.get("not_started")]
         msg = draft_message(
             team_name         = team["name"],
             managers          = team["managers"],
@@ -178,6 +179,8 @@ def _render_team_lines(team, quarter_pct, config, *, initiative_hlevel=3, includ
                                   for e in slipping_epics],
             unestimated_epics = [{"key": e["key"], "summary": e["summary"]}
                                   for e in unestimated_epics],
+            not_started_epics = [{"key": e["key"], "summary": e["summary"]}
+                                  for e in not_started_epics],
             quarter_pct       = quarter_pct,
         )
         w()
@@ -275,8 +278,9 @@ def print_report(team_summaries, quarter_pct, config):
 
         # ── draft message ─────────────────────────────────────────────
         if team["any_needs_attention"]:
-            slipping_epics    = [e for e in epics if e["slipping"] or e.get("not_started")]
+            slipping_epics    = [e for e in epics if e["slipping"]]
             unestimated_epics = [e for e in epics if e["progress"]["unestimated"]]
+            not_started_epics = [e for e in epics if e.get("not_started")]
             msg = draft_message(
                 team_name         = team["name"],
                 managers          = team["managers"],
@@ -284,6 +288,8 @@ def print_report(team_summaries, quarter_pct, config):
                                       for e in slipping_epics],
                 unestimated_epics = [{"key": e["key"], "summary": e["summary"]}
                                       for e in unestimated_epics],
+                not_started_epics = [{"key": e["key"], "summary": e["summary"]}
+                                      for e in not_started_epics],
                 quarter_pct       = quarter_pct,
             )
             print()
@@ -424,8 +430,9 @@ def write_slack_drafts(team_summaries, quarter_pct, config, path=None):
         w()
         w("---")
         for team in attention_teams:
-            slipping_epics    = [e for e in team["epics"] if e["slipping"] or e.get("not_started")]
+            slipping_epics    = [e for e in team["epics"] if e["slipping"]]
             unestimated_epics = [e for e in team["epics"] if e["progress"]["unestimated"]]
+            not_started_epics = [e for e in team["epics"] if e.get("not_started")]
             msg = draft_message(
                 team_name         = team["name"],
                 managers          = team["managers"],
@@ -433,6 +440,8 @@ def write_slack_drafts(team_summaries, quarter_pct, config, path=None):
                                       for e in slipping_epics],
                 unestimated_epics = [{"key": e["key"], "summary": e["summary"]}
                                       for e in unestimated_epics],
+                not_started_epics = [{"key": e["key"], "summary": e["summary"]}
+                                      for e in not_started_epics],
                 quarter_pct       = quarter_pct,
             )
             w()

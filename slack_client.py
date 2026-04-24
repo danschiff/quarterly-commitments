@@ -43,24 +43,28 @@ def _join_mentions(slack_ids):
     return ", ".join(mentions[:-1]) + f", and {mentions[-1]}"
 
 
-def draft_message(team_name, managers, slipping_epics, quarter_pct, unestimated_epics=None):
+def draft_message(team_name, managers, slipping_epics, quarter_pct,
+                  unestimated_epics=None, not_started_epics=None):
     """Return a ready-to-paste Slack message for a team needing attention.
 
     The <@USER_ID> syntax renders as a clickable @mention when pasted
     into any Slack message box.
 
     Args:
-        team_name:         str   — display name of the team
-        managers:          list  — [{em_slack_id, sem_slack_id}, ...] (1 or more)
-        slipping_epics:    list  — epic dicts with keys "key" and "summary"
-        quarter_pct:       float — fraction of quarter elapsed (e.g. 0.211)
-        unestimated_epics: list  — epic dicts with keys "key" and "summary" (optional)
+        team_name:          str   — display name of the team
+        managers:           list  — [{em_slack_id, sem_slack_id}, ...] (1 or more)
+        slipping_epics:     list  — epic dicts with keys "key" and "summary"
+        quarter_pct:        float — fraction of quarter elapsed (e.g. 0.211)
+        unestimated_epics:  list  — epic dicts with keys "key" and "summary" (optional)
+        not_started_epics:  list  — epic dicts with keys "key" and "summary" (optional)
 
     Returns:
         str
     """
     if unestimated_epics is None:
         unestimated_epics = []
+    if not_started_epics is None:
+        not_started_epics = []
 
     pct_str = f"{quarter_pct * 100:.0f}%"
     greeting_ids = _dedupe_manager_ids(managers)
@@ -85,6 +89,13 @@ def draft_message(team_name, managers, slipping_epics, quarter_pct, unestimated_
         parts.append(
             f"The following commitment(s) don't have story point estimates yet. "
             f"Anything committed for the quarter should be estimated so we can track progress:\n\n"
+            f"{epic_lines}"
+        )
+
+    if not_started_epics:
+        epic_lines = "\n".join(f"  • {e['key']}: {e['summary']}" for e in not_started_epics)
+        parts.append(
+            f"The following commitment(s) have not been started yet:\n\n"
             f"{epic_lines}"
         )
 

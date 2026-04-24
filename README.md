@@ -13,15 +13,16 @@ For each configured team it:
 3. Compares the epic's `% complete` against `% of quarter elapsed`:
    - **Unestimated** — the epic has no story-point estimates at all.
    - **Slipping** — the epic is more than `slippage_threshold` (default 10 pp) behind the linear target.
+   - **Not started** — the epic is estimated but no child work has been completed yet.
    - **On track** — everything else, including 100% complete.
 4. Surfaces the **Health** status from Jira (`customfield_10883`) for each epic and its parent initiative so you can see at a glance whether the team considers it healthy, at risk, or off track.
-5. Filters out epics where no child work has started yet (noise).
+5. Flags estimated epics where no child work has been completed yet as **Not started**, keeping them visible in reports and Slack drafts.
 6. Within each team, **initiatives committed to the current quarter** (via `customfield_11245`) are sorted to the top and marked with a 🎯 badge so they're immediately visible.
 7. Renders four artifacts so you can skim quickly and act:
    - Console report
    - Combined Markdown report: `report-YYYY-MM-DD.md`
    - One Markdown file per team in `reports/YYYY-MM-DD/`
-   - A separate Slack-drafts file (`slack-drafts-YYYY-MM-DD.md`) that contains a paste-ready DM for every team with slipping or unestimated epics, @-mentioning each team's EM(s) and SEM.
+   - A separate Slack-drafts file (`slack-drafts-YYYY-MM-DD.md`) that contains a paste-ready DM for every team with slipping, unestimated, or not-started epics, @-mentioning each team's EM(s) and SEM. Each category gets its own section so managers can distinguish issues that haven't started from those that are actively falling behind.
 
 Raw Jira data is cached to `data-YYYY-MM-DD.json` so subsequent runs the same day are instant and don't hit the API. Use `--refresh` to force a re-fetch.
 
