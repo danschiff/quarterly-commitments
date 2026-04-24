@@ -12,13 +12,12 @@ For each configured team it:
 2. Walks each Epic's child issues and sums up done vs. total story points.
 3. Compares the epic's `% complete` against `% of quarter elapsed`:
    - **Unestimated** — the epic has no story-point estimates at all.
-   - **Slipping** — the epic is more than `slippage_threshold` (default 10 pp) behind the linear target.
-   - **Not started** — the epic is estimated but no child work has been completed yet.
+   - **Not started** — the epic is estimated, has child issues, but none are completed yet.
+   - **Slipping** — the epic has started (at least one completed issue) but is more than `slippage_threshold` (default 10 pp) behind the linear target.
    - **On track** — everything else, including 100% complete.
 4. Surfaces the **Health** status from Jira (`customfield_10883`) for each epic and its parent initiative so you can see at a glance whether the team considers it healthy, at risk, or off track.
-5. Flags estimated epics where no child work has been completed yet as **Not started**, keeping them visible in reports and Slack drafts.
-6. Within each team, **initiatives committed to the current quarter** (via `customfield_11245`) are sorted to the top and marked with a 🎯 badge so they're immediately visible.
-7. Renders four artifacts so you can skim quickly and act:
+5. Within each team, **initiatives committed to the current quarter** (via `customfield_11245`) are sorted to the top and marked with a 🎯 badge so they're immediately visible.
+6. Renders five artifacts so you can skim quickly and act:
    - Console report
    - Combined Markdown report: `report-YYYY-MM-DD.md`
    - One Markdown file per team in `reports/YYYY-MM-DD/`
@@ -69,9 +68,10 @@ pip install -r requirements.txt
 Edit `config.yaml`:
 
 - `jira.base_url` / `jira.email` — your Jira Cloud instance and account.
-- `jira.current_quarter` — the exact dropdown value used for the "Committed Quarter" custom field (e.g. `"FY26 Quarter 4"`). This value is also used to determine which initiatives are committed this quarter (see step 6 in *What it does*).
+- `jira.current_quarter` — the exact dropdown value used for the "Committed Quarter" custom field (e.g. `"FY26 Quarter 4"`). This value is also used to determine which initiatives are committed this quarter (see step 5 in *What it does*).
 - `jira.committed_quarter_field` / `jira.team_field` / `jira.story_points_field` — custom field IDs for your Jira instance.
 - `jira.health_field` — custom field ID for the Health status field (e.g. `customfield_10883`). When set, a Health column appears in every epic table and an inline health tag is shown on initiative headings.
+- `jira.epic_link_mode` — how child issues are linked to their parent epic. Use `"parent"` for next-gen (team-managed) projects; use `"epic_link"` for classic (company-managed) projects.
 - `quarter.start` / `quarter.end` — ISO dates bounding the current quarter.
 - `slippage_threshold` — fraction behind linear target before an epic is flagged (0.10 = 10 pp).
 - `teams` — one entry per team. Each team needs:
@@ -121,7 +121,7 @@ python -m pytest tests/ -q
 
 ## Output formats
 
-- **Console** — color-free progress bars, slipping/unestimated flags, summary footer.
+- **Console** — color-free progress bars, per-epic status flags (slipping / not-started / unestimated), and an "ACTION NEEDED" summary footer.
 - **`report-YYYY-MM-DD.md`** — one big Markdown report covering all teams.
 - **`reports/YYYY-MM-DD/<team>.md`** — per-team Markdown for sharing individually.
 - **`slack-drafts-YYYY-MM-DD.md`** — only the draft messages, grouped by team, each in a fenced code block ready to copy.
@@ -133,7 +133,8 @@ python -m pytest tests/ -q
 |--------|---------|
 | 🎯 Committed this quarter · | Initiative is committed to the current quarter (sorted to the top within each team). |
 | ✅ On Track / ⚠️ At Risk / 🛑 Off Track | Initiative or epic Health status from Jira (`health_field`). Shown inline on initiative headings and in the Health column of the epic table. |
-| ⚠ SLIPPING | Epic is behind the linear burn-down target by more than `slippage_threshold`. |
+| 🔴 NOT STARTED | Epic is estimated and has child issues, but none are completed yet. |
+| ⚠ SLIPPING | Epic has started but is behind the linear burn-down target by more than `slippage_threshold`. |
 | ⚠ UNESTIMATED | Epic has no story-point estimates; can't compute progress. |
 | ✓ on track | Epic is at or ahead of target. |
 
