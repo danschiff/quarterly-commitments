@@ -10,6 +10,11 @@ jira:
   # Never put the token value here — set it in your shell: export JIRA_API_TOKEN=...
   api_token_env: "JIRA_API_TOKEN"
 
+  # Expiration date (ISO format) of the current Jira API token.
+  # When auth errors occur, the client will surface a warning if this date
+  # is near or past. Update this whenever you rotate the token.
+  api_token_expires: "2027-04-01"
+
   # JQL field ID for the "Committed Quarter" dropdown on Epics
   committed_quarter_field: "cf[11245]"
 

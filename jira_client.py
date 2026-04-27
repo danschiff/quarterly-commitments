@@ -1,9 +1,38 @@
 import os
+from datetime import date
 
 import requests
 from requests.adapters import HTTPAdapter
 from requests.auth import HTTPBasicAuth
 from urllib3.util.retry import Retry
+
+
+def _token_expiry_warning(config):
+    """Return a human-readable warning string if the configured Jira API
+    token expiration date is near or past, otherwise None.
+    """
+    expires_str = config.get("jira", {}).get("api_token_expires")
+    if not expires_str:
+        return None
+    try:
+        expires = date.fromisoformat(str(expires_str))
+    except ValueError:
+        return f"(could not parse jira.api_token_expires={expires_str!r})"
+    today = date.today()
+    days = (expires - today).days
+    if days < 0:
+        return (
+            f"Your Jira API token expired on {expires.isoformat()} "
+            f"({-days} day(s) ago). Generate a new one at "
+            "https://id.atlassian.com/manage-profile/security/api-tokens "
+            "and update JIRA_API_TOKEN and config.yaml:jira.api_token_expires."
+        )
+    if days <= 14:
+        return (
+            f"Your Jira API token expires on {expires.isoformat()} "
+            f"(in {days} day(s))."
+        )
+    return None
 
 
 def _make_session():
@@ -95,7 +124,22 @@ def _search_jql(config, jql, fields, max_results=100):
         response = session.post(
             url, json=body, headers=headers, auth=auth, timeout=30
         )
-        response.raise_for_status()
+        if not response.ok:
+            hint = ""
+            if response.status_code in (401, 403):
+                warning = _token_expiry_warning(config)
+                if warning:
+                    hint = f" — {warning}"
+                else:
+                    hint = (
+                        " — Jira rejected the credentials. Verify "
+                        "JIRA_API_TOKEN is current and not expired "
+                        "(see config.yaml:jira.api_token_expires)."
+                    )
+            raise requests.HTTPError(
+                f"{response.status_code} {response.reason} from {url}{hint}",
+                response=response,
+            )
         data = response.json()
 
         issues.extend(data.get("issues", []))
