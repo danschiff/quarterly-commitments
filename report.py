@@ -63,10 +63,13 @@ def _group_by_initiative(epics):
                 "summary": epic.get("initiative_summary"),
                 "epics": [],
                 "committed": False,
+                "rolling": False,
             }
         groups[ikey]["epics"].append(epic)
         if epic.get("committed_this_quarter"):
             groups[ikey]["committed"] = True
+        if epic.get("rolling"):
+            groups[ikey]["rolling"] = True
 
     # Sort: committed initiatives first, then alphabetical by key, None last
     named = sorted(
@@ -76,7 +79,7 @@ def _group_by_initiative(epics):
     order_sorted = named + ([None] if None in groups else [])
 
     return [
-        (k, groups[k]["summary"], groups[k]["epics"], groups[k]["committed"])
+        (k, groups[k]["summary"], groups[k]["epics"], groups[k]["committed"], groups[k]["rolling"])
         for k in order_sorted
     ]
 
@@ -113,19 +116,27 @@ def _render_team_lines(team, quarter_pct, config, *, initiative_hlevel=3, includ
     n_on_track        = len(epics) - n_slipping - n_unestimated
     initiative_prefix = "#" * initiative_hlevel
 
+    n_rolling         = sum(1 for e in epics if e.get("rolling"))
+    n_on_track        -= n_rolling
+
     lines = []
 
     def w(text=""):
         lines.append(text)
 
-    w(f"{len(epics)} epic(s) &nbsp;·&nbsp; "
-      f"{n_on_track} on track &nbsp;·&nbsp; "
-      f"{n_slipping} slipping &nbsp;·&nbsp; "
-      f"{n_unestimated} unestimated")
+    summary_parts = [
+        f"{len(epics)} epic(s)",
+        f"{n_on_track} on track",
+        f"{n_slipping} slipping",
+        f"{n_unestimated} unestimated",
+    ]
+    if n_rolling:
+        summary_parts.append(f"{n_rolling} rolling")
+    w(" &nbsp;·&nbsp; ".join(summary_parts))
     w()
 
     if epics:
-        for ikey, isummary, iepics, committed in _group_by_initiative(epics):
+        for ikey, isummary, iepics, committed, rolling in _group_by_initiative(epics):
             if ikey:
                 ilink = f"[{ikey}]({base_url}/browse/{ikey})"
                 # Initiative health — derive from the first epic that carries it
@@ -134,17 +145,21 @@ def _render_team_lines(team, quarter_pct, config, *, initiative_hlevel=3, includ
                     None,
                 )
                 committed_suffix = " &nbsp;·&nbsp; 🎯 Committed this quarter" if committed else ""
-                health_suffix = (
-                    f" &nbsp;·&nbsp; Health (from Jira): {_health_tag(init_health)}"
-                    if init_health
-                    else (" &nbsp;·&nbsp; 🛑 Missing Jira Health Value" if committed else "")
-                )
-                w(f"{initiative_prefix} {ilink} — {isummary}{committed_suffix}{health_suffix}")
+                rolling_suffix = " &nbsp;·&nbsp; ↺ Rolling commitment" if rolling else ""
+                if rolling:
+                    health_suffix = ""
+                else:
+                    health_suffix = (
+                        f" &nbsp;·&nbsp; Health (from Jira): {_health_tag(init_health)}"
+                        if init_health
+                        else (" &nbsp;·&nbsp; 🛑 Missing Jira Health Value" if committed else "")
+                    )
+                w(f"{initiative_prefix} {ilink} — {isummary}{committed_suffix}{rolling_suffix}{health_suffix}")
             else:
                 w(f"{initiative_prefix} (no parent initiative)")
             w()
             w("| Epic | Summary | Health | Progress | Status |")
-            w("|------|---------|--------|----------|--------|")
+            w("|------|---------|--------|----------|--------|")  
             for epic in iepics:
                 prog   = epic["progress"]
                 link   = f"[{epic['key']}]({base_url}/browse/{epic['key']})"
@@ -155,7 +170,9 @@ def _render_team_lines(team, quarter_pct, config, *, initiative_hlevel=3, includ
                 detail = f"{bar} {pct} ({pts}, {iss})"
                 health = _health_tag(epic.get("health")) or "—"
 
-                if prog["unestimated"]:
+                if epic.get("rolling"):
+                    status = "N/A"
+                elif prog["unestimated"]:
                     status = "⚠ UNESTIMATED"
                 elif epic.get("not_started"):
                     status = "🔴 NOT STARTED"
@@ -169,9 +186,9 @@ def _render_team_lines(team, quarter_pct, config, *, initiative_hlevel=3, includ
             w()
 
     if include_draft and team["any_needs_attention"]:
-        slipping_epics    = [e for e in epics if e["slipping"]]
-        unestimated_epics = [e for e in epics if e["progress"]["unestimated"]]
-        not_started_epics = [e for e in epics if e.get("not_started")]
+        slipping_epics    = [e for e in epics if e["slipping"]     and not e.get("rolling")]
+        unestimated_epics = [e for e in epics if e["progress"]["unestimated"] and not e.get("rolling")]
+        not_started_epics = [e for e in epics if e.get("not_started") and not e.get("rolling")]
         msg = draft_message(
             team_name         = team["name"],
             managers          = team["managers"],
@@ -225,30 +242,36 @@ def print_report(team_summaries, quarter_pct, config):
     # ── per-team sections ─────────────────────────────────────────────────
     for team in team_summaries:
         epics        = team["epics"]
-        n_slipping   = sum(1 for e in epics if e["slipping"])
+        n_slipping    = sum(1 for e in epics if e["slipping"])
         n_unestimated = sum(1 for e in epics if e["progress"]["unestimated"])
-        n_on_track   = len(epics) - n_slipping - n_unestimated
+        n_rolling     = sum(1 for e in epics if e.get("rolling"))
+        n_on_track    = len(epics) - n_slipping - n_unestimated - n_rolling
 
+        rolling_suffix = f"  {n_rolling} rolling" if n_rolling else ""
         print()
         print(f"  ── {team['name']}  ({len(epics)} epic(s)  |  "
               f"{n_on_track} on track  "
               f"{n_slipping} slipping  "
-              f"{n_unestimated} unestimated)")
+              f"{n_unestimated} unestimated{rolling_suffix})")
         print()
 
-        for ikey, isummary, iepics, committed in _group_by_initiative(epics):
+        for ikey, isummary, iepics, committed, rolling in _group_by_initiative(epics):
             init_health = next(
                 (e.get("initiative_health") for e in iepics if e.get("initiative_health")),
                 None,
             )
             committed_tag = "  [🎯 Committed this quarter]" if committed else ""
-            health_suffix = (
-                f"  [{_health_tag(init_health)}]"
-                if init_health
-                else ("  [🛑 Missing Jira Health Value]" if committed else "")
-            )
+            rolling_tag = "  [↺ Rolling]" if rolling else ""
+            if rolling:
+                health_suffix = ""
+            else:
+                health_suffix = (
+                    f"  [{_health_tag(init_health)}]"
+                    if init_health
+                    else ("  [🛑 Missing Jira Health Value]" if committed else "")
+                )
             label = (
-                f"{ikey}  {isummary[:48]}{committed_tag}{health_suffix}" if ikey
+                f"{ikey}  {isummary[:48]}{committed_tag}{rolling_tag}{health_suffix}" if ikey
                 else "(no parent initiative)"
             )
             print(f"    ·· {label}")
@@ -257,7 +280,9 @@ def print_report(team_summaries, quarter_pct, config):
             for epic in iepics:
                 prog = epic["progress"]
 
-                if prog["unestimated"]:
+                if epic.get("rolling"):
+                    tag = "  N/A"
+                elif prog["unestimated"]:
                     tag = "  ⚠  UNESTIMATED"
                 elif epic.get("not_started"):
                     tag = "  🔴  NOT STARTED"
@@ -266,7 +291,7 @@ def print_report(team_summaries, quarter_pct, config):
                 else:
                     tag = "  ✓  on track"
 
-                health_col = f"  [{_health_tag(epic.get('health'))}]" if epic.get("health") else ""
+                health_col = f"  [{_health_tag(epic.get('health'))}]" if epic.get("health") and not rolling else ""
                 bar  = _progress_bar(prog["pct_complete"])
                 pct  = prog["pct_complete"] * 100
                 pts  = f"{prog['done_pts']:.0f}/{prog['total_pts']:.0f} pts"
@@ -278,9 +303,9 @@ def print_report(team_summaries, quarter_pct, config):
 
         # ── draft message ─────────────────────────────────────────────
         if team["any_needs_attention"]:
-            slipping_epics    = [e for e in epics if e["slipping"]]
-            unestimated_epics = [e for e in epics if e["progress"]["unestimated"]]
-            not_started_epics = [e for e in epics if e.get("not_started")]
+            slipping_epics    = [e for e in epics if e["slipping"]       and not e.get("rolling")]
+            unestimated_epics = [e for e in epics if e["progress"]["unestimated"] and not e.get("rolling")]
+            not_started_epics = [e for e in epics if e.get("not_started") and not e.get("rolling")]
             msg = draft_message(
                 team_name         = team["name"],
                 managers          = team["managers"],
@@ -307,8 +332,8 @@ def print_report(team_summaries, quarter_pct, config):
     if attention_teams:
         print(f"  ACTION NEEDED: {len(attention_teams)} team(s) require outreach:")
         for t in attention_teams:
-            n_slip = sum(1 for e in t["epics"] if e["slipping"])
-            n_unest = sum(1 for e in t["epics"] if e["progress"]["unestimated"])
+            n_slip  = sum(1 for e in t["epics"] if e["slipping"]                and not e.get("rolling"))
+            n_unest = sum(1 for e in t["epics"] if e["progress"]["unestimated"] and not e.get("rolling"))
             parts = []
             if n_slip:
                 parts.append(f"{n_slip} slipping")
@@ -375,8 +400,8 @@ def write_markdown_report(team_summaries, quarter_pct, config, path=None):
         w(f"**{len(attention_teams)} team(s) require outreach:**")
         w()
         for t in attention_teams:
-            n_slip  = sum(1 for e in t["epics"] if e["slipping"])
-            n_unest = sum(1 for e in t["epics"] if e["progress"]["unestimated"])
+            n_slip  = sum(1 for e in t["epics"] if e["slipping"]                and not e.get("rolling"))
+            n_unest = sum(1 for e in t["epics"] if e["progress"]["unestimated"] and not e.get("rolling"))
             parts = []
             if n_slip:
                 parts.append(f"{n_slip} slipping")

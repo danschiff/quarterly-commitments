@@ -273,7 +273,7 @@ def fetch_initiatives(config, keys):
     committed_cf_key = _cf_to_customfield(jira_cfg["committed_quarter_field"])  # customfield_11245
     health_cf_key = _cf_to_customfield(jira_cfg.get("health_field", ""))        # customfield_10883
 
-    fetch_fields = [committed_cf_key]
+    fetch_fields = [committed_cf_key, "labels"]
     if health_cf_key:
         fetch_fields.append(health_cf_key)
 
@@ -296,9 +296,11 @@ def fetch_initiatives(config, keys):
             )
             health_raw = f.get(health_cf_key) if health_cf_key else None
             health = health_raw.get("value") if isinstance(health_raw, dict) else health_raw
+            labels = f.get("labels") or []
             result[issue["key"]] = {
                 "committed_quarter": committed_quarter,
                 "health": health,
+                "rolling": "Rolling" in labels,
             }
 
     return result

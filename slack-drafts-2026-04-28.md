@@ -32,7 +32,6 @@ The following commitment(s) have not been started yet:
 
   • RC-1922: Enhanced Resume Search (M1)
   • RC-1714: AI Resume Summary Agent: Control Tower enablement and eventing (M2)
-  • RC-1623: PDF Post-Release
   • RC-1555: AI Candidate Fit: Agent Quality Monitoring (M4)
   • RC-1267: AI Candidate Fit: Reporting enhancements (M4)
   • RC-920: AI Talent Rediscovery Agent: Control Tower enablement and eventing (M3)
@@ -91,7 +90,6 @@ The following commitment(s) are currently behind the expected burn-down rate:
 
   • LMS-16534: FY26H2 - Security + AppSec Tickets
   • LMS-16528: FY26H2 Product Team To-Dos
-  • LMS-16527: FY26H2 - Enhancements
   • LMS-16482: FY26Q4 - LMS Tech Debt
 
 The following commitment(s) don't have story point estimates yet. Anything committed for the quarter should be estimated so we can track progress:
@@ -202,9 +200,12 @@ Doing my weekly check-in on quarterly commitments for the *Employee Voice* team 
 The following commitment(s) don't have story point estimates yet. Anything committed for the quarter should be estimated so we can track progress:
 
   • EV-2348: Employee Voice: Qase Standards Adoption
+  • EV-2125: Feedback from GA Phase
+
+The following commitment(s) have not been started yet:
+
   • EV-2128: Add Audit Log Eventing for Action Plans
   • EV-2127: Add Audit Log Eventing for Surveys
-  • EV-2125: Feedback from GA Phase
 
 A few questions:
   1. Are you still on track to deliver these by end of quarter?

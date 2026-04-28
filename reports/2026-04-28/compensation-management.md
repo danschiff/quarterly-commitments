@@ -30,7 +30,7 @@
 | Epic | Summary | Health | Progress | Status |
 |------|---------|--------|----------|--------|
 | [CMGSD-10223](https://paylocity.atlassian.net/browse/CMGSD-10223) | CM Tech Miscellaneous RTB FY26Q4 | — | [█░░░░░░░░░░░░░░░░░░░] 5.9% (1/17 pts, 2/21 issues) | ⚠ SLIPPING |
-| [CMGSD-10162](https://paylocity.atlassian.net/browse/CMGSD-10162) | Bug Bash FY26 H2 | — | [███████████████████░] 93.0% (40/43 pts, 13/14 issues) | ✓ on track |
+| [CMGSD-10162](https://paylocity.atlassian.net/browse/CMGSD-10162) | Bug Bash FY26 H2 | — | [████████████████████] 100.0% (43/43 pts, 14/14 issues) | ✓ on track |
 | [CMGSD-7344](https://paylocity.atlassian.net/browse/CMGSD-7344) | Toggle removal FY26Q4 | — | [░░░░░░░░░░░░░░░░░░░░] 0.0% (0/2 pts, 0/8 issues) | 🔴 NOT STARTED |
 
 ## [CMGSD-9358](https://paylocity.atlassian.net/browse/CMGSD-9358) — Deployment Activities FY26 &nbsp;·&nbsp; 🎯 Committed this quarter &nbsp;·&nbsp; 🛑 Missing Jira Health Value
@@ -45,7 +45,7 @@
 | Epic | Summary | Health | Progress | Status |
 |------|---------|--------|----------|--------|
 | [CMGSD-10161](https://paylocity.atlassian.net/browse/CMGSD-10161) | Technical Refinement | — | [████████░░░░░░░░░░░░] 40.0% (8/20 pts, 5/18 issues) | ✓ on track |
-| [CMGSD-9406](https://paylocity.atlassian.net/browse/CMGSD-9406) | [4/29/26] Remove Lightcast data and experiences for contractual obligations | — | [████░░░░░░░░░░░░░░░░] 21.4% (3/14 pts, 3/9 issues) | ✓ on track |
+| [CMGSD-9406](https://paylocity.atlassian.net/browse/CMGSD-9406) | [4/29/26] Remove Lightcast data and experiences for contractual obligations | — | [███████░░░░░░░░░░░░░] 35.7% (5/14 pts, 4/9 issues) | ✓ on track |
 
 ## [PCS-3316](https://paylocity.atlassian.net/browse/PCS-3316) — Position Management Web Platform Migration &nbsp;·&nbsp; 🎯 Committed this quarter &nbsp;·&nbsp; Health (from Jira): 🟢 On Track
 

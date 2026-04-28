@@ -5,15 +5,15 @@
 
 ---
 
-26 epic(s) &nbsp;·&nbsp; 20 on track &nbsp;·&nbsp; 2 slipping &nbsp;·&nbsp; 4 unestimated
+26 epic(s) &nbsp;·&nbsp; 17 on track &nbsp;·&nbsp; 2 slipping &nbsp;·&nbsp; 4 unestimated &nbsp;·&nbsp; 3 rolling
 
-## [PCS-4067](https://paylocity.atlassian.net/browse/PCS-4067) — H2 Client Retention PDRs &nbsp;·&nbsp; 🎯 Committed this quarter &nbsp;·&nbsp; 🛑 Missing Jira Health Value
+## [PCS-4067](https://paylocity.atlassian.net/browse/PCS-4067) — H2 Client Retention PDRs &nbsp;·&nbsp; 🎯 Committed this quarter &nbsp;·&nbsp; ↺ Rolling commitment
 
 | Epic | Summary | Health | Progress | Status |
 |------|---------|--------|----------|--------|
-| [RC-1886](https://paylocity.atlassian.net/browse/RC-1886) | Candidate Profile Post Launch Monitoring | — | [████████████████░░░░] 81.7% (49/60 pts, 16/19 issues) | ✓ on track |
-| [RC-1624](https://paylocity.atlassian.net/browse/RC-1624) | FY26 Q4 High/Critical PDRs | — | [█████████████░░░░░░░] 62.7% (47/75 pts, 14/22 issues) | ✓ on track |
-| [RC-1623](https://paylocity.atlassian.net/browse/RC-1623) | PDF Post-Release | — | [░░░░░░░░░░░░░░░░░░░░] 0.0% (0/14 pts, 0/6 issues) | 🔴 NOT STARTED |
+| [RC-1886](https://paylocity.atlassian.net/browse/RC-1886) | Candidate Profile Post Launch Monitoring | — | [████████████████░░░░] 77.8% (49/63 pts, 16/19 issues) | N/A |
+| [RC-1624](https://paylocity.atlassian.net/browse/RC-1624) | FY26 Q4 High/Critical PDRs | — | [████████████░░░░░░░░] 58.8% (47/80 pts, 14/23 issues) | N/A |
+| [RC-1623](https://paylocity.atlassian.net/browse/RC-1623) | PDF Post-Release | — | [░░░░░░░░░░░░░░░░░░░░] 0.0% (0/14 pts, 0/6 issues) | N/A |
 
 ## [PCS-2985](https://paylocity.atlassian.net/browse/PCS-2985) — Qase Standards & Guidelines &nbsp;·&nbsp; Health (from Jira): 🟢 On Track
 
@@ -44,7 +44,7 @@
 | [RC-1923](https://paylocity.atlassian.net/browse/RC-1923) | AI Candidate Fit:  Settings & Permissions (M1) | — | [████████████████████] 100.0% (35/35 pts, 10/10 issues) | ✓ on track |
 | [RC-1921](https://paylocity.atlassian.net/browse/RC-1921) | Enhanced Candidate Search (M2) | — | [█████████░░░░░░░░░░░] 46.7% (14/30 pts, 4/7 issues) | ✓ on track |
 | [RC-1920](https://paylocity.atlassian.net/browse/RC-1920) | AI Candidate Fit: Agent Setup (M1) | — | [████████████████░░░░] 81.2% (65/80 pts, 16/24 issues) | ✓ on track |
-| [RC-1845](https://paylocity.atlassian.net/browse/RC-1845) | AI Candidate Fit: Job Folder Citrus 7 (M2) | — | [██████████░░░░░░░░░░] 51.9% (56/108 pts, 21/40 issues) | ✓ on track |
+| [RC-1845](https://paylocity.atlassian.net/browse/RC-1845) | AI Candidate Fit: Job Folder Citrus 7 (M2) | — | [███████████░░░░░░░░░] 52.8% (56/106 pts, 21/39 issues) | ✓ on track |
 | [RC-1588](https://paylocity.atlassian.net/browse/RC-1588) | AI Candidate Fit: Infrastructure Setup (M1) | — | [████████████████████] 100.0% (25/25 pts, 9/9 issues) | ✓ on track |
 | [RC-1560](https://paylocity.atlassian.net/browse/RC-1560) | AI Recruiting Agents: Audit Trail | — | [░░░░░░░░░░░░░░░░░░░░] 0.0% (0/0 pts, 0/1 issues) | ⚠ UNESTIMATED |
 | [RC-1555](https://paylocity.atlassian.net/browse/RC-1555) | AI Candidate Fit: Agent Quality Monitoring (M4) | — | [░░░░░░░░░░░░░░░░░░░░] 0.0% (0/22 pts, 0/7 issues) | 🔴 NOT STARTED |

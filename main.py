@@ -198,6 +198,11 @@ def build_summaries_from_raw(raw_data, config, quarter_pct):
 
             ikey = epic_data.get("initiative_key")
             init_data = initiatives.get(ikey, {}) if ikey else {}
+
+            rolling = init_data.get("rolling", False)
+            if rolling:
+                slipping = False
+                not_started = False
             committed_this_quarter = (
                 init_data.get("committed_quarter") == current_quarter
             )
@@ -213,6 +218,7 @@ def build_summaries_from_raw(raw_data, config, quarter_pct):
                 "progress":              prog,
                 "slipping":              slipping,
                 "not_started":           not_started,
+                "rolling":               rolling,
             })
 
         team_cfg = cfg_by_name.get(team_data["name"])
@@ -229,10 +235,11 @@ def build_summaries_from_raw(raw_data, config, quarter_pct):
             "name":         team_data["name"],
             "managers":     managers,
             "epics":        enriched,
-            "any_slipping": any(e["slipping"] for e in enriched),
+            "any_slipping": any(e["slipping"] for e in enriched if not e["rolling"]),
             "any_needs_attention": any(
                 e["slipping"] or e["not_started"] or e["progress"]["unestimated"]
                 for e in enriched
+                if not e["rolling"]
             ),
         })
 

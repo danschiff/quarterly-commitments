@@ -14,6 +14,7 @@ For each configured team it:
    - **Unestimated** — the epic has no story-point estimates at all.
    - **Not started** — the epic is estimated, has child issues, but none are completed yet.
    - **Slipping** — the epic has started (at least one completed issue) but is more than `slippage_threshold` (default 10 pp) behind the linear target.
+   - **Rolling Commitment** — the epic's parent initiative is tagged `Rolling` in Jira. The initiative is marked `↺ Rolling commitment` in the report (health omitted), its epics show `N/A` status, and they are excluded from Slack outreach.
    - **On track** — everything else, including 100% complete.
 4. Surfaces the **Health** status from Jira (`customfield_10883`) for each epic and its parent initiative so you can see at a glance whether the team considers it healthy, at risk, or off track.
 5. Within each team, **initiatives committed to the current quarter** (via `customfield_11245`) are sorted to the top and marked with a 🎯 badge so they're immediately visible.
@@ -21,7 +22,7 @@ For each configured team it:
    - Console report
    - Combined Markdown report: `report-YYYY-MM-DD.md`
    - One Markdown file per team in `reports/YYYY-MM-DD/`
-   - A separate Slack-drafts file (`slack-drafts-YYYY-MM-DD.md`) that contains a paste-ready DM for every team with slipping, unestimated, or not-started epics, @-mentioning each team's EM(s) and SEM. Each category gets its own section so managers can distinguish issues that haven't started from those that are actively falling behind.
+   - A separate Slack-drafts file (`slack-drafts-YYYY-MM-DD.md`) that contains a paste-ready DM for every team with slipping, unestimated, or not-started epics, @-mentioning each team's EM(s) and SEM. Each category gets its own section so managers can distinguish issues that haven't started from those that are actively falling behind. Epics tagged as Rolling Commitments are excluded from these drafts.
 
 Raw Jira data is cached to `data-YYYY-MM-DD.json` so subsequent runs the same day are instant and don't hit the API. Use `--refresh` to force a re-fetch.
 
@@ -117,7 +118,7 @@ docker compose run --rm test
 
 ## Output formats
 
-- **Console** — color-free progress bars, per-epic status flags (slipping / not-started / unestimated), and an "ACTION NEEDED" summary footer.
+- **Console** — color-free progress bars, per-epic status flags (slipping / rolling / not-started / unestimated), and an "ACTION NEEDED" summary footer.
 - **`report-YYYY-MM-DD.md`** — one big Markdown report covering all teams.
 - **`reports/YYYY-MM-DD/<team>.md`** — per-team Markdown for sharing individually.
 - **`slack-drafts-YYYY-MM-DD.md`** — only the draft messages, grouped by team, each in a fenced code block ready to copy.
@@ -131,6 +132,7 @@ docker compose run --rm test
 | ✅ On Track / ⚠️ At Risk / 🛑 Off Track | Initiative or epic Health status from Jira (`health_field`). Shown inline on initiative headings and in the Health column of the epic table. |
 | 🔴 NOT STARTED | Epic is estimated and has child issues, but none are completed yet. |
 | ⚠ SLIPPING | Epic has started but is behind the linear burn-down target by more than `slippage_threshold`. |
+| ↺ Rolling commitment | Initiative is tagged `Rolling` in Jira. Shown on the initiative heading; its epics show `N/A` status and are excluded from Slack outreach. Health value is omitted for rolling initiatives. |
 | ⚠ UNESTIMATED | Epic has no story-point estimates; can't compute progress. |
 | ✓ on track | Epic is at or ahead of target. |
 

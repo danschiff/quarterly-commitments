@@ -5,7 +5,7 @@
 
 ---
 
-12 epic(s) &nbsp;·&nbsp; 11 on track &nbsp;·&nbsp; 1 slipping &nbsp;·&nbsp; 0 unestimated
+12 epic(s) &nbsp;·&nbsp; 10 on track &nbsp;·&nbsp; 1 slipping &nbsp;·&nbsp; 0 unestimated &nbsp;·&nbsp; 1 rolling
 
 ## [PCS-2804](https://paylocity.atlassian.net/browse/PCS-2804) — Client retention PDR’s &nbsp;·&nbsp; 🎯 Committed this quarter &nbsp;·&nbsp; Health (from Jira): 🟢 On Track
 
@@ -13,11 +13,11 @@
 |------|---------|--------|----------|--------|
 | [IN-9020](https://paylocity.atlassian.net/browse/IN-9020) | Q4 Client Retention PDR Initiative | — | [███████████████░░░░░] 75.4% (49/65 pts, 9/16 issues) | ✓ on track |
 
-## [PCS-2990](https://paylocity.atlassian.net/browse/PCS-2990) — H2 I9 Issues &nbsp;·&nbsp; 🎯 Committed this quarter &nbsp;·&nbsp; Health (from Jira): 🟢 On Track
+## [PCS-2990](https://paylocity.atlassian.net/browse/PCS-2990) — H2 I9 Issues &nbsp;·&nbsp; 🎯 Committed this quarter &nbsp;·&nbsp; ↺ Rolling commitment
 
 | Epic | Summary | Health | Progress | Status |
 |------|---------|--------|----------|--------|
-| [IN-8886](https://paylocity.atlassian.net/browse/IN-8886) | Q4 Fixes for I-9 Post MVP Bugs | — | [████████░░░░░░░░░░░░] 41.2% (14/34 pts, 3/10 issues) | ✓ on track |
+| [IN-8886](https://paylocity.atlassian.net/browse/IN-8886) | Q4 Fixes for I-9 Post MVP Bugs | — | [████████░░░░░░░░░░░░] 41.2% (14/34 pts, 3/10 issues) | N/A |
 
 ## [PCS-422](https://paylocity.atlassian.net/browse/PCS-422) — E-Verify Task & Dashboard &nbsp;·&nbsp; 🎯 Committed this quarter &nbsp;·&nbsp; Health (from Jira): 🟢 On Track
 

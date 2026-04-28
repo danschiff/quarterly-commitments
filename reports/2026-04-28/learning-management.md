@@ -5,7 +5,7 @@
 
 ---
 
-31 epic(s) &nbsp;·&nbsp; 20 on track &nbsp;·&nbsp; 4 slipping &nbsp;·&nbsp; 7 unestimated
+31 epic(s) &nbsp;·&nbsp; 21 on track &nbsp;·&nbsp; 3 slipping &nbsp;·&nbsp; 7 unestimated
 
 ## [LMS-16201](https://paylocity.atlassian.net/browse/LMS-16201) — FY26 H2 Learning Maintenance &nbsp;·&nbsp; 🎯 Committed this quarter &nbsp;·&nbsp; Health (from Jira): 🟢 On Track
 
@@ -23,8 +23,8 @@
 | [LMS-16532](https://paylocity.atlassian.net/browse/LMS-16532) | FY26H2 - Deployments | — | [█████████████████░░░] 86.3% (50/58 pts, 26/30 issues) | ✓ on track |
 | [LMS-16529](https://paylocity.atlassian.net/browse/LMS-16529) | Upgrade LRNWE to .NET 10 | — | [████████████████████] 100.0% (4/4 pts, 2/2 issues) | ✓ on track |
 | [LMS-16528](https://paylocity.atlassian.net/browse/LMS-16528) | FY26H2 Product Team To-Dos | — | [░░░░░░░░░░░░░░░░░░░░] 0.0% (0/2 pts, 4/10 issues) | ⚠ SLIPPING |
-| [LMS-16482](https://paylocity.atlassian.net/browse/LMS-16482) | FY26Q4 - LMS Tech Debt | — | [███░░░░░░░░░░░░░░░░░] 16.0% (38/235 pts, 24/147 issues) | ⚠ SLIPPING |
-| [LMS-16480](https://paylocity.atlassian.net/browse/LMS-16480) | FY26H2 - Bugs | — | [███████████░░░░░░░░░] 53.7% (40/74 pts, 48/114 issues) | ✓ on track |
+| [LMS-16482](https://paylocity.atlassian.net/browse/LMS-16482) | FY26Q4 - LMS Tech Debt | — | [███░░░░░░░░░░░░░░░░░] 16.8% (40/235 pts, 25/147 issues) | ⚠ SLIPPING |
+| [LMS-16480](https://paylocity.atlassian.net/browse/LMS-16480) | FY26H2 - Bugs | — | [███████████░░░░░░░░░] 53.7% (40/74 pts, 48/117 issues) | ✓ on track |
 | [LMS-16391](https://paylocity.atlassian.net/browse/LMS-16391) | FY26H2 - Resolve Intermittent Completion Issues | — | [░░░░░░░░░░░░░░░░░░░░] 0.0% (0/2 pts, 0/1 issues) | 🔴 NOT STARTED |
 | [LMS-16156](https://paylocity.atlassian.net/browse/LMS-16156) | Long-Lived Toggles | — | [░░░░░░░░░░░░░░░░░░░░] 0.0% (0/0 pts, 0/1 issues) | ⚠ UNESTIMATED |
 
@@ -33,7 +33,7 @@
 | Epic | Summary | Health | Progress | Status |
 |------|---------|--------|----------|--------|
 | [LMS-16646](https://paylocity.atlassian.net/browse/LMS-16646) | FY26H2 - Unplanned Work Due to Outage or Migration (e.g. of Another Team or 3rd Party) | — | [██████████░░░░░░░░░░] 52.4% (1/2 pts, 2/3 issues) | ✓ on track |
-| [LMS-16527](https://paylocity.atlassian.net/browse/LMS-16527) | FY26H2 - Enhancements | — | [███░░░░░░░░░░░░░░░░░] 14.5% (3/21 pts, 5/44 issues) | ⚠ SLIPPING |
+| [LMS-16527](https://paylocity.atlassian.net/browse/LMS-16527) | FY26H2 - Enhancements | — | [█████░░░░░░░░░░░░░░░] 24.1% (5/21 pts, 6/44 issues) | ✓ on track |
 | [LMS-16483](https://paylocity.atlassian.net/browse/LMS-16483) | FY26H2 - PDR Enhancements - LMS | 🟢 On Track | [████░░░░░░░░░░░░░░░░] 21.0% (6/29 pts, 7/29 issues) | ✓ on track |
 
 ## [LMS-16579](https://paylocity.atlassian.net/browse/LMS-16579) — FY26Q4 Customer as a Co-Creator &nbsp;·&nbsp; 🎯 Committed this quarter &nbsp;·&nbsp; Health (from Jira): 🟢 On Track

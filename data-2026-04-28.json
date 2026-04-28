@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-04-28T15:05:06",
+  "fetched_at": "2026-04-28T17:43:57",
   "teams": [
     {
       "name": "Recruiting",
@@ -460,8 +460,8 @@
             {
               "key": "RC-2120",
               "summary": "we are not showing the Potential Rehire icon on the candidate profile",
-              "status_category": "new",
-              "story_points": null
+              "status_category": "indeterminate",
+              "story_points": 3.0
             }
           ]
         },
@@ -695,12 +695,6 @@
               "story_points": 5.0
             },
             {
-              "key": "RC-2132",
-              "summary": "FE: Job Folder - AI Buttons",
-              "status_category": "new",
-              "story_points": 2.0
-            },
-            {
               "key": "RC-2133",
               "summary": "FE: Job Folder - Filter - Candidate Fit",
               "status_category": "new",
@@ -877,6 +871,12 @@
             {
               "key": "RC-2136",
               "summary": "PDR-056392 -  LinkedIn is showing \"Fully Remote\" jobs as \"Fully, Switzerland\"",
+              "status_category": "indeterminate",
+              "story_points": 5.0
+            },
+            {
+              "key": "RC-2137",
+              "summary": "FeedJob table is not being updated with edits - impacting data sent to Indeed",
               "status_category": "indeterminate",
               "story_points": 5.0
             }
@@ -1491,7 +1491,7 @@
             {
               "key": "RC-1668",
               "summary": "FE: Add AI Disclosure & Opt-out as screener in Job Feed",
-              "status_category": "new",
+              "status_category": "indeterminate",
               "story_points": 3.0
             },
             {
@@ -4674,7 +4674,7 @@
             {
               "key": "LMS-17012",
               "summary": "New Profile Data Endpoint from Marketplace to show in LMS",
-              "status_category": "indeterminate",
+              "status_category": "done",
               "story_points": 2.0
             },
             {
@@ -5742,7 +5742,7 @@
             {
               "key": "LMS-17108",
               "summary": "Investigate SQL waits on parallel Assignment queries",
-              "status_category": "indeterminate",
+              "status_category": "done",
               "story_points": 2.0
             },
             {
@@ -6467,6 +6467,24 @@
               "summary": "Training Results > Employees regression",
               "status_category": "indeterminate",
               "story_points": 1.0
+            },
+            {
+              "key": "LMS-17146",
+              "summary": "Training Results Details not updating statuses on the Employees tab to reflect the derived status on the Assignment Instance tab",
+              "status_category": "new",
+              "story_points": null
+            },
+            {
+              "key": "LMS-17147",
+              "summary": "Limited companies can assign \"Previewable Limited\" trainings",
+              "status_category": "new",
+              "story_points": null
+            },
+            {
+              "key": "LMS-17148",
+              "summary": "Training Results Details Chart Percentage Calc Fails",
+              "status_category": "new",
+              "story_points": null
             }
           ]
         },
@@ -7372,6 +7390,12 @@
               "story_points": null
             },
             {
+              "key": "PAC-2745",
+              "summary": "Add WorkEngine DataDog Alerting",
+              "status_category": "indeterminate",
+              "story_points": null
+            },
+            {
               "key": "PAC-2747",
               "summary": "Run DB Health Score for PM",
               "status_category": "indeterminate",
@@ -7863,7 +7887,7 @@
             {
               "key": "PAC-2641",
               "summary": "Conduct After Performance Testing for Review  Deletion",
-              "status_category": "new",
+              "status_category": "indeterminate",
               "story_points": 1.0
             },
             {
@@ -8204,7 +8228,7 @@
             {
               "key": "CMGSD-10389",
               "summary": "Automation - PDR-066287 revise access based on worksheet supervisor - Worksheet, Worksheet List",
-              "status_category": "new",
+              "status_category": "indeterminate",
               "story_points": 3.0
             },
             {
@@ -8465,7 +8489,7 @@
             {
               "key": "CMGSD-10240",
               "summary": "PDR-067433 - Compensation Plan Config - Company Set doesn't clear out cycle on companyId change",
-              "status_category": "indeterminate",
+              "status_category": "done",
               "story_points": 3.0
             },
             {
@@ -8759,7 +8783,7 @@
             {
               "key": "CMGSD-9758",
               "summary": "Export PositionMappingV2 Documents",
-              "status_category": "indeterminate",
+              "status_category": "done",
               "story_points": 2.0
             },
             {
@@ -9559,43 +9583,43 @@
               "key": "EV-2566",
               "summary": "Add Event: Create Action Plan",
               "status_category": "new",
-              "story_points": null
+              "story_points": 1.0
             },
             {
               "key": "EV-2567",
               "summary": "Add Event: Edit Action Plan",
               "status_category": "new",
-              "story_points": null
+              "story_points": 1.0
             },
             {
               "key": "EV-2568",
               "summary": "Add Event: Add Action Item",
               "status_category": "new",
-              "story_points": null
+              "story_points": 1.0
             },
             {
               "key": "EV-2569",
               "summary": "Add Event: Edit Action Item",
               "status_category": "new",
-              "story_points": null
+              "story_points": 1.0
             },
             {
               "key": "EV-2571",
               "summary": "Add Event: Delete Action Item",
               "status_category": "new",
-              "story_points": null
+              "story_points": 1.0
             },
             {
               "key": "EV-2572",
               "summary": "Add Event: Publish Action Plan",
               "status_category": "new",
-              "story_points": null
+              "story_points": 1.0
             },
             {
               "key": "EV-2573",
               "summary": "Add Event: Complete Action Plan",
               "status_category": "new",
-              "story_points": null
+              "story_points": 1.0
             }
           ]
         },
@@ -9610,79 +9634,79 @@
               "key": "EV-2577",
               "summary": "Add Event: Create Survey Template",
               "status_category": "new",
-              "story_points": null
+              "story_points": 1.0
             },
             {
               "key": "EV-2578",
               "summary": "Add Event: Schedule Survey Instance Launch",
               "status_category": "new",
-              "story_points": null
+              "story_points": 1.0
             },
             {
               "key": "EV-2579",
               "summary": "Add Event: Edit Survey Template",
               "status_category": "new",
-              "story_points": null
+              "story_points": 1.0
             },
             {
               "key": "EV-2580",
               "summary": "Add Event: Share Survey Instance Results",
               "status_category": "new",
-              "story_points": null
+              "story_points": 1.0
             },
             {
               "key": "EV-2581",
               "summary": "Add Event: Copy Survey Template",
               "status_category": "new",
-              "story_points": null
+              "story_points": 1.0
             },
             {
               "key": "EV-2582",
               "summary": "Add Event: Close Survey",
               "status_category": "new",
-              "story_points": null
+              "story_points": 1.0
             },
             {
               "key": "EV-2583",
               "summary": "Add Event: Send Reminder",
               "status_category": "new",
-              "story_points": null
+              "story_points": 1.0
             },
             {
               "key": "EV-2584",
               "summary": "Add Event: Add Participants",
               "status_category": "new",
-              "story_points": null
+              "story_points": 1.0
             },
             {
               "key": "EV-2585",
               "summary": "Add Event: Delete Survey Template",
               "status_category": "new",
-              "story_points": null
+              "story_points": 1.0
             },
             {
               "key": "EV-2586",
               "summary": "Add Event: Archive Survey Template",
               "status_category": "new",
-              "story_points": null
+              "story_points": 1.0
             },
             {
               "key": "EV-2587",
               "summary": "Add Event: Launch Survey Instance",
               "status_category": "new",
-              "story_points": null
+              "story_points": 1.0
             },
             {
               "key": "EV-2588",
               "summary": "Add Event: Re-open Survey Instance",
               "status_category": "new",
-              "story_points": null
+              "story_points": 1.0
             },
             {
               "key": "EV-2591",
               "summary": "Add Event: Share Survey Template",
               "status_category": "new",
-              "story_points": null
+              "story_points": 1.0
             }
           ]
         },
@@ -9707,147 +9731,183 @@
   "initiatives": {
     "REC-3184": {
       "committed_quarter": "FY26 Quarter 4",
-      "health": "\ud83d\udfe2 On Track"
+      "health": "\ud83d\udfe2 On Track",
+      "rolling": false
     },
     "REC-2656": {
       "committed_quarter": "FY26 Quarter 4",
-      "health": "\ud83d\udfe2 On Track"
+      "health": "\ud83d\udfe2 On Track",
+      "rolling": false
     },
     "PCS-4157": {
       "committed_quarter": "FY26 Quarter 4",
-      "health": "\ud83d\udfe2 On Track"
+      "health": "\ud83d\udfe2 On Track",
+      "rolling": false
     },
     "PCS-4108": {
       "committed_quarter": "FY26 Quarter 4",
-      "health": "\ud83d\udfe2 On Track"
+      "health": "\ud83d\udfe2 On Track",
+      "rolling": false
     },
     "PCS-4067": {
       "committed_quarter": "FY26 Quarter 4",
-      "health": null
+      "health": null,
+      "rolling": true
     },
     "PCS-3983": {
       "committed_quarter": null,
-      "health": null
+      "health": null,
+      "rolling": false
     },
     "PCS-3976": {
       "committed_quarter": null,
-      "health": null
+      "health": null,
+      "rolling": false
     },
     "PCS-3791": {
       "committed_quarter": "FY26 Quarter 4",
-      "health": "\ud83d\udfe2 On Track"
+      "health": "\ud83d\udfe2 On Track",
+      "rolling": false
     },
     "PCS-3775": {
       "committed_quarter": null,
-      "health": "\ud83d\udfe2 On Track"
+      "health": "\ud83d\udfe2 On Track",
+      "rolling": false
     },
     "PCS-3696": {
       "committed_quarter": "FY27 Quarter 3",
-      "health": "\ud83d\udfe2 On Track"
+      "health": "\ud83d\udfe2 On Track",
+      "rolling": false
     },
     "PCS-3619": {
       "committed_quarter": null,
-      "health": null
+      "health": null,
+      "rolling": false
     },
     "PCS-3316": {
       "committed_quarter": "FY26 Quarter 4",
-      "health": "\ud83d\udfe2 On Track"
+      "health": "\ud83d\udfe2 On Track",
+      "rolling": false
     },
     "PCS-3272": {
       "committed_quarter": "FY27 Quarter 1",
-      "health": "\ud83d\udfe2 On Track"
+      "health": "\ud83d\udfe2 On Track",
+      "rolling": false
     },
     "PCS-3271": {
       "committed_quarter": "FY27 Quarter 1",
-      "health": "\ud83d\udfe2 On Track"
+      "health": "\ud83d\udfe2 On Track",
+      "rolling": false
     },
     "PCS-3170": {
       "committed_quarter": "FY27 Quarter 1",
-      "health": null
+      "health": null,
+      "rolling": false
     },
     "PCS-3109": {
       "committed_quarter": "FY26 Quarter 4",
-      "health": "\ud83d\udfe2 On Track"
+      "health": "\ud83d\udfe2 On Track",
+      "rolling": false
     },
     "PCS-3100": {
       "committed_quarter": "FY26 Quarter 4",
-      "health": "\ud83d\udfe2 On Track"
+      "health": "\ud83d\udfe2 On Track",
+      "rolling": false
     },
     "PCS-2990": {
       "committed_quarter": "FY26 Quarter 4",
-      "health": "\ud83d\udfe2 On Track"
+      "health": "\ud83d\udfe2 On Track",
+      "rolling": true
     },
     "PCS-2985": {
       "committed_quarter": "FY27 Quarter 2",
-      "health": "\ud83d\udfe2 On Track"
+      "health": "\ud83d\udfe2 On Track",
+      "rolling": false
     },
     "PCS-2804": {
       "committed_quarter": "FY26 Quarter 4",
-      "health": "\ud83d\udfe2 On Track"
+      "health": "\ud83d\udfe2 On Track",
+      "rolling": false
     },
     "PCS-1732": {
       "committed_quarter": null,
-      "health": "\ud83d\udfe2 On Track"
+      "health": "\ud83d\udfe2 On Track",
+      "rolling": false
     },
     "PCS-1289": {
       "committed_quarter": "FY26 Quarter 3",
-      "health": "\ud83d\udfe2 On Track"
+      "health": "\ud83d\udfe2 On Track",
+      "rolling": false
     },
     "PCS-1222": {
       "committed_quarter": null,
-      "health": "\ud83d\udfe2 On Track"
+      "health": "\ud83d\udfe2 On Track",
+      "rolling": false
     },
     "PCS-579": {
       "committed_quarter": null,
-      "health": "\ud83d\udfe2 On Track"
+      "health": "\ud83d\udfe2 On Track",
+      "rolling": false
     },
     "PCS-422": {
       "committed_quarter": "FY26 Quarter 4",
-      "health": "\ud83d\udfe2 On Track"
+      "health": "\ud83d\udfe2 On Track",
+      "rolling": false
     },
     "PAC-2430": {
       "committed_quarter": "FY26 Quarter 4",
-      "health": "\ud83d\udfe2 On Track"
+      "health": "\ud83d\udfe2 On Track",
+      "rolling": false
     },
     "LMS-16579": {
       "committed_quarter": "FY26 Quarter 4",
-      "health": "\ud83d\udfe2 On Track"
+      "health": "\ud83d\udfe2 On Track",
+      "rolling": false
     },
     "LMS-16502": {
       "committed_quarter": "FY26 Quarter 4",
-      "health": "\ud83d\udfe2 On Track"
+      "health": "\ud83d\udfe2 On Track",
+      "rolling": false
     },
     "LMS-16201": {
       "committed_quarter": "FY26 Quarter 4",
-      "health": "\ud83d\udfe2 On Track"
+      "health": "\ud83d\udfe2 On Track",
+      "rolling": false
     },
     "EV-2196": {
       "committed_quarter": "FY26 Quarter 4",
-      "health": "\ud83d\udfe2 On Track"
+      "health": "\ud83d\udfe2 On Track",
+      "rolling": false
     },
     "EV-2117": {
       "committed_quarter": null,
-      "health": "\ud83d\udfe2 On Track"
+      "health": "\ud83d\udfe2 On Track",
+      "rolling": false
     },
     "CMGSD-10225": {
       "committed_quarter": "FY26 Quarter 4",
-      "health": null
+      "health": null,
+      "rolling": false
     },
     "CMGSD-10220": {
       "committed_quarter": "FY26 Quarter 4",
-      "health": null
+      "health": null,
+      "rolling": false
     },
     "CMGSD-9358": {
       "committed_quarter": "FY26 Quarter 4",
-      "health": null
+      "health": null,
+      "rolling": false
     },
     "CMGSD-9060": {
       "committed_quarter": "FY26 Quarter 4",
-      "health": null
+      "health": null,
+      "rolling": false
     },
     "CMGSD-8617": {
       "committed_quarter": "FY26 Quarter 4",
-      "health": null
+      "health": null,
+      "rolling": false
     }
   }
 }

@@ -5,7 +5,7 @@
 
 ---
 
-9 epic(s) &nbsp;·&nbsp; 5 on track &nbsp;·&nbsp; 0 slipping &nbsp;·&nbsp; 4 unestimated
+9 epic(s) &nbsp;·&nbsp; 7 on track &nbsp;·&nbsp; 0 slipping &nbsp;·&nbsp; 2 unestimated
 
 ## [EV-2196](https://paylocity.atlassian.net/browse/EV-2196) — EV Customer as Co-Creator Enhancements FY26H2 &nbsp;·&nbsp; 🎯 Committed this quarter &nbsp;·&nbsp; Health (from Jira): 🟢 On Track
 
@@ -31,8 +31,8 @@
 |------|---------|--------|----------|--------|
 | [EV-2595](https://paylocity.atlassian.net/browse/EV-2595) | Create AuditLog integration plumbing | — | [██████░░░░░░░░░░░░░░] 27.7% (13/47 pts, 7/15 issues) | ✓ on track |
 | [EV-2469](https://paylocity.atlassian.net/browse/EV-2469) | Update EmployeeVoice WorkEngine to WEv6 | — | [████████████████████] 100.0% (8/8 pts, 1/1 issues) | ✓ on track |
-| [EV-2128](https://paylocity.atlassian.net/browse/EV-2128) | Add Audit Log Eventing for Action Plans | — | [░░░░░░░░░░░░░░░░░░░░] 0.0% (0/0 pts, 0/7 issues) | ⚠ UNESTIMATED |
-| [EV-2127](https://paylocity.atlassian.net/browse/EV-2127) | Add Audit Log Eventing for Surveys | — | [░░░░░░░░░░░░░░░░░░░░] 0.0% (0/0 pts, 0/13 issues) | ⚠ UNESTIMATED |
+| [EV-2128](https://paylocity.atlassian.net/browse/EV-2128) | Add Audit Log Eventing for Action Plans | — | [░░░░░░░░░░░░░░░░░░░░] 0.0% (0/7 pts, 0/7 issues) | 🔴 NOT STARTED |
+| [EV-2127](https://paylocity.atlassian.net/browse/EV-2127) | Add Audit Log Eventing for Surveys | — | [░░░░░░░░░░░░░░░░░░░░] 0.0% (0/13 pts, 0/13 issues) | 🔴 NOT STARTED |
 
 ## [EV-2117](https://paylocity.atlassian.net/browse/EV-2117) — Build UForms Library & Builder &nbsp;·&nbsp; Health (from Jira): 🟢 On Track
 
