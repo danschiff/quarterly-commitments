@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-04-28T17:43:57",
+  "fetched_at": "2026-04-28T18:25:57",
   "teams": [
     {
       "name": "Recruiting",
@@ -1984,6 +1984,12 @@
               "key": "IN-9391",
               "summary": "WPL: Close Case with reason \"Other\" does not present the required reason text box",
               "status_category": "new",
+              "story_points": null
+            },
+            {
+              "key": "IN-9397",
+              "summary": "Web Platform: E-Verify project folder restructuring",
+              "status_category": "indeterminate",
               "story_points": null
             }
           ]
@@ -6453,7 +6459,7 @@
             {
               "key": "LMS-17142",
               "summary": "Filtering By Overdue in Training Results Not Working Correctly",
-              "status_category": "indeterminate",
+              "status_category": "done",
               "story_points": 1.0
             },
             {
@@ -7368,7 +7374,7 @@
             {
               "key": "PAC-2731",
               "summary": "STE: Automate Reviews Multi-Approver Scenario 2",
-              "status_category": "new",
+              "status_category": "indeterminate",
               "story_points": null
             },
             {
@@ -7400,6 +7406,12 @@
               "summary": "Run DB Health Score for PM",
               "status_category": "indeterminate",
               "story_points": 3.0
+            },
+            {
+              "key": "PAC-2752",
+              "summary": "STE: Automate Feedback Dashboard (PERF-178)",
+              "status_category": "new",
+              "story_points": null
             }
           ]
         },
@@ -7641,6 +7653,12 @@
             {
               "key": "PAC-2746",
               "summary": "Unable to click Positions in Position Filter when Viewing Succession Plan",
+              "status_category": "new",
+              "story_points": null
+            },
+            {
+              "key": "PAC-2751",
+              "summary": "Recommended Contributor Name repeats after searching in Employee Picker",
               "status_category": "new",
               "story_points": null
             }
@@ -9827,7 +9845,7 @@
     "PCS-2804": {
       "committed_quarter": "FY26 Quarter 4",
       "health": "\ud83d\udfe2 On Track",
-      "rolling": false
+      "rolling": true
     },
     "PCS-1732": {
       "committed_quarter": null,

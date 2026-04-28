@@ -5,13 +5,13 @@
 
 ---
 
-12 epic(s) &nbsp;·&nbsp; 10 on track &nbsp;·&nbsp; 1 slipping &nbsp;·&nbsp; 0 unestimated &nbsp;·&nbsp; 1 rolling
+12 epic(s) &nbsp;·&nbsp; 9 on track &nbsp;·&nbsp; 1 slipping &nbsp;·&nbsp; 0 unestimated &nbsp;·&nbsp; 2 rolling
 
-## [PCS-2804](https://paylocity.atlassian.net/browse/PCS-2804) — Client retention PDR’s &nbsp;·&nbsp; 🎯 Committed this quarter &nbsp;·&nbsp; Health (from Jira): 🟢 On Track
+## [PCS-2804](https://paylocity.atlassian.net/browse/PCS-2804) — Client retention PDR’s &nbsp;·&nbsp; 🎯 Committed this quarter &nbsp;·&nbsp; ↺ Rolling commitment
 
 | Epic | Summary | Health | Progress | Status |
 |------|---------|--------|----------|--------|
-| [IN-9020](https://paylocity.atlassian.net/browse/IN-9020) | Q4 Client Retention PDR Initiative | — | [███████████████░░░░░] 75.4% (49/65 pts, 9/16 issues) | ✓ on track |
+| [IN-9020](https://paylocity.atlassian.net/browse/IN-9020) | Q4 Client Retention PDR Initiative | — | [███████████████░░░░░] 75.4% (49/65 pts, 9/16 issues) | N/A |
 
 ## [PCS-2990](https://paylocity.atlassian.net/browse/PCS-2990) — H2 I9 Issues &nbsp;·&nbsp; 🎯 Committed this quarter &nbsp;·&nbsp; ↺ Rolling commitment
 
@@ -24,7 +24,7 @@
 | Epic | Summary | Health | Progress | Status |
 |------|---------|--------|----------|--------|
 | [IN-9355](https://paylocity.atlassian.net/browse/IN-9355) | T: Viewing and Completing Actions in Onboarding's E-Verify Task | — | [████████████████░░░░] 82.5% (47/57 pts, 14/17 issues) | ✓ on track |
-| [IN-9354](https://paylocity.atlassian.net/browse/IN-9354) | T: E-Verify Case Edit and Submit Actions, Status Sync | — | [██████████████████░░] 87.6% (169/193 pts, 38/43 issues) | ✓ on track |
+| [IN-9354](https://paylocity.atlassian.net/browse/IN-9354) | T: E-Verify Case Edit and Submit Actions, Status Sync | — | [██████████████████░░] 87.6% (169/193 pts, 38/44 issues) | ✓ on track |
 | [IN-9352](https://paylocity.atlassian.net/browse/IN-9352) | T: I9 Verification Task Integration | — | [████████████████████] 100.0% (3/3 pts, 1/1 issues) | ✓ on track |
 | [IN-9351](https://paylocity.atlassian.net/browse/IN-9351) | T: E-Verify System Down/Slowness | — | [███████░░░░░░░░░░░░░] 34.8% (8/23 pts, 3/7 issues) | ✓ on track |
 | [IN-9350](https://paylocity.atlassian.net/browse/IN-9350) | T: Training Acknowledgement for Access to E-Verify Task | — | [░░░░░░░░░░░░░░░░░░░░] 0.0% (0/7 pts, 0/2 issues) | 🔴 NOT STARTED |

@@ -11,8 +11,8 @@
 
 | Epic | Summary | Health | Progress | Status |
 |------|---------|--------|----------|--------|
-| [PAC-2647](https://paylocity.atlassian.net/browse/PAC-2647) | PM FY26Q4 Maintenance | — | [██████████░░░░░░░░░░] 47.8% (43/90 pts, 23/76 issues) | ✓ on track |
-| [PAC-2646](https://paylocity.atlassian.net/browse/PAC-2646) | PM FY26Q4 Tech Debt | — | [█░░░░░░░░░░░░░░░░░░░] 4.5% (3/66 pts, 1/39 issues) | ⚠ SLIPPING |
+| [PAC-2647](https://paylocity.atlassian.net/browse/PAC-2647) | PM FY26Q4 Maintenance | — | [██████████░░░░░░░░░░] 47.8% (43/90 pts, 23/77 issues) | ✓ on track |
+| [PAC-2646](https://paylocity.atlassian.net/browse/PAC-2646) | PM FY26Q4 Tech Debt | — | [█░░░░░░░░░░░░░░░░░░░] 4.5% (3/66 pts, 1/40 issues) | ⚠ SLIPPING |
 
 ## [PCS-4157](https://paylocity.atlassian.net/browse/PCS-4157) — Audit Trail for Performance - Top 5 Events &nbsp;·&nbsp; 🎯 Committed this quarter &nbsp;·&nbsp; Health (from Jira): 🟢 On Track
 

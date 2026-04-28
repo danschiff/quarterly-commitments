@@ -24,7 +24,7 @@
 | [LMS-16529](https://paylocity.atlassian.net/browse/LMS-16529) | Upgrade LRNWE to .NET 10 | — | [████████████████████] 100.0% (4/4 pts, 2/2 issues) | ✓ on track |
 | [LMS-16528](https://paylocity.atlassian.net/browse/LMS-16528) | FY26H2 Product Team To-Dos | — | [░░░░░░░░░░░░░░░░░░░░] 0.0% (0/2 pts, 4/10 issues) | ⚠ SLIPPING |
 | [LMS-16482](https://paylocity.atlassian.net/browse/LMS-16482) | FY26Q4 - LMS Tech Debt | — | [███░░░░░░░░░░░░░░░░░] 16.8% (40/235 pts, 25/147 issues) | ⚠ SLIPPING |
-| [LMS-16480](https://paylocity.atlassian.net/browse/LMS-16480) | FY26H2 - Bugs | — | [███████████░░░░░░░░░] 53.7% (40/74 pts, 48/117 issues) | ✓ on track |
+| [LMS-16480](https://paylocity.atlassian.net/browse/LMS-16480) | FY26H2 - Bugs | — | [███████████░░░░░░░░░] 55.1% (41/74 pts, 49/117 issues) | ✓ on track |
 | [LMS-16391](https://paylocity.atlassian.net/browse/LMS-16391) | FY26H2 - Resolve Intermittent Completion Issues | — | [░░░░░░░░░░░░░░░░░░░░] 0.0% (0/2 pts, 0/1 issues) | 🔴 NOT STARTED |
 | [LMS-16156](https://paylocity.atlassian.net/browse/LMS-16156) | Long-Lived Toggles | — | [░░░░░░░░░░░░░░░░░░░░] 0.0% (0/0 pts, 0/1 issues) | ⚠ UNESTIMATED |
 
