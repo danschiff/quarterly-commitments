@@ -1,0 +1,16 @@
+x-app-base: &app-base
+  build: .
+  volumes:
+    - .:/app
+  stdin_open: true
+  tty: true
+
+services:
+  app:
+    <<: *app-base
+    env_file: .env
+    command: ["python", "main.py"]
+
+  test:
+    <<: *app-base
+    command: ["python", "-m", "pytest", "tests/", "-q"]

@@ -1,0 +1,34 @@
+# Version control
+.git
+.gitignore
+
+# Python artifacts
+.venv
+__pycache__
+*.pyc
+*.pyo
+.pytest_cache
+
+# Generated output — written to the bind-mounted host directory at run time,
+# not needed in the image build context.
+data-*.json
+report-*.md
+slack-drafts-*.md
+reports/
+_last_run.txt
+
+# Secrets — never bake into the image
+.env
+
+# Diagnostic / scratch scripts not needed at run time
+tests/_diag*
+
+# Planning / enhancement notes
+enhancements/
+.github/
+
+# Editor / OS noise
+.vscode
+*.code-workspace
+.DS_Store
+Thumbs.db

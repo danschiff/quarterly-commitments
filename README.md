@@ -49,21 +49,27 @@ Unestimated epics (`total_pts == 0`) are flagged separately so they're surfaced 
 
 ### Prerequisites
 
-- Python 3.11+
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/) (Windows / macOS) or Docker Engine + the Compose plugin (Linux)
 - A Jira Cloud account with an API token ([generate one here](https://id.atlassian.com/manage-profile/security/api-tokens))
-- PowerShell (examples below), bash, or zsh
 
-### 1. Clone and install
+No Python installation required — everything runs inside the container.
+
+### 1. Clone
 
 ```powershell
 git clone <repo-url> quarterly-commitments
 cd quarterly-commitments
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-pip install -r requirements.txt
 ```
 
-### 2. Configure
+### 2. Set your Jira API token
+
+```powershell
+copy .env.example .env
+```
+
+Open `.env` and fill in `JIRA_API_TOKEN`. This file is gitignored — never commit it.
+
+### 3. Configure
 
 Edit `config.yaml`:
 
@@ -83,38 +89,28 @@ Edit `config.yaml`:
 
 To find a Slack user ID: open the person's profile → **…** menu → **Copy member ID**.
 
-### 3. Set your Jira API token
-
-```powershell
-$env:JIRA_API_TOKEN = "your-token-here"
-```
-
-(Persist it via **System Properties → Environment Variables** or a shell profile.)
-
 ### 4. Run
 
 ```powershell
-python main.py
+docker compose run --rm app
 ```
 
-First run of the day hits Jira and writes `data-YYYY-MM-DD.json`. Subsequent runs reuse the cache.
+The first run of the day hits Jira and writes `data-YYYY-MM-DD.json`. Subsequent runs reuse the cache. Outputs land in the repo root and `reports/YYYY-MM-DD/` exactly as before — the working directory is bind-mounted into the container.
 
 Useful flags:
 
-- `python main.py --refresh` — re-fetch from Jira even if today's cache exists.
-- `python main.py --data path/to/data.json` — load an explicit cache file (handy for reruns across midnight).
-
-Outputs land in the repo root and `reports/YYYY-MM-DD/`.
+- `docker compose run --rm app python main.py --refresh` — re-fetch from Jira even if today's cache exists.
+- `docker compose run --rm app python main.py --data path/to/data.json` — load an explicit cache file (handy for reruns across midnight).
 
 ### 5. Run the tests
 
 ```powershell
-python -m pytest tests/ -q
+docker compose run --rm test
 ```
 
 ## Weekly workflow
 
-1. `python main.py`
+1. `docker compose run --rm app`
 2. Skim the console "ACTION NEEDED" footer.
 3. Open `slack-drafts-YYYY-MM-DD.md`, copy the block for each team that needs outreach, and paste into Slack.
 4. Share `report-YYYY-MM-DD.md` (or a specific per-team file under `reports/YYYY-MM-DD/`) with stakeholders as needed.
@@ -145,6 +141,7 @@ Whenever you ship an enhancement, update the relevant section above:
 - New behavior or new flag? → update **What it does**, **Getting started → Run**, or **Output formats**.
 - New module or significant refactor? → update the **How it works** table.
 - New config key? → document it in **Getting started → Configure** and add a commented example in `config.yaml`.
+- New environment variable? → add it to `.env.example` (with a comment) and document it in **Getting started → Set your Jira API token**.
 - Breaking change to config or output paths? → call it out near the top of **What it does** so first-time readers see it.
 
 A good heuristic: if someone cloning the repo a year from now would be confused without the change, the README needs an edit.
